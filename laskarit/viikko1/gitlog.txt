@@ -1,0 +1,107 @@
+commit 1aaf465740b67e8fd401dd1ec17e8415cc493f46
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 20:05:28 2019 +0200
+
+    viimeiset muutokset
+
+ tiedostoja/file2             | 0
+ tiedostoja/{file1 => file22} | 0
+ tiedostoja/file3             | 1 +
+ 3 files changed, 1 insertion(+)
+
+commit a41678162fd948c4e6371c077f33f0675b223a9f
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 19:59:19 2019 +0200
+
+    uusia tiedostoja
+
+ tiedostoja/file1 | 0
+ tiedostoja/file2 | 0
+ tiedostoja/file3 | 1 +
+ 3 files changed, 1 insertion(+)
+
+commit a10edf9f441b63057fbd93612f40b1c194ddc055
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:45:16 2019 +0200
+
+    add -p
+
+ eka.txt   | 2 +-
+ kolma.txt | 1 +
+ 2 files changed, 2 insertions(+), 1 deletion(-)
+
+commit e14eb84c33dd57950228c732012d4b0b157f37de
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:32:14 2019 +0200
+
+    Poisto ja uudellennimeäminen
+
+ tiedosto.txt => eka.txt | 0
+ toinen.txt              | 1 -
+ 2 files changed, 1 deletion(-)
+
+commit 30f3e9a0156c722dd58cf9fdd9aeffd3eb395abb
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:28:18 2019 +0200
+
+    Tekstiä poistettu ja lisätty
+
+ tiedosto.txt | 6 +-----
+ 1 file changed, 1 insertion(+), 5 deletions(-)
+
+commit 005d36e476a20c92f497e9591d6cb560a46bf4e4
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:25:43 2019 +0200
+
+    tiedosto.txt lsätty tekstiä
+
+ tiedosto.txt | 34 +++++++++++++++++++++++++++++++++-
+ 1 file changed, 33 insertions(+), 1 deletion(-)
+
+commit d1769e4a6c413a11b76a4399a115c6ac9dbff5bb
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:15:00 2019 +0200
+
+    stuff lisätty
+
+ stuff/tavaraa | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 463e93764200acfad31bd1735e86a9bc7e017322
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:13:58 2019 +0200
+
+    muokattiin 2. ja 3.
+
+ kolma.txt  | 1 +
+ toinen.txt | 1 +
+ 2 files changed, 2 insertions(+)
+
+commit a64f3b063a5f34fb52c2a77deac2adae57c40b6f
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:12:34 2019 +0200
+
+    kolma.txt luotu
+
+ kolma.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
+commit 1d22fd4dbd4a13522f6a093618e049aed14f5352
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:08:04 2019 +0200
+
+    muutos ja lisäys
+
+ tiedosto.txt | 1 +
+ toinen.txt   | 0
+ 2 files changed, 1 insertion(+)
+
+commit b6e01aea0d6f738e8124b2857d3df6af1b76807a
+Author: Laura S <46318664+sinikala@users.noreply.github.com>
+Date:   Thu Mar 14 17:04:22 2019 +0200
+
+    tiedosto.txt luotu
+
+ tiedosto.txt | 0
+ 1 file changed, 0 insertions(+), 0 deletions(-)
+
