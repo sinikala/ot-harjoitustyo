@@ -1,4 +1,3 @@
-
 package com.mycompany.unicafe;
 
 public class Kassapaate {
@@ -9,6 +8,8 @@ public class Kassapaate {
 
     public Kassapaate() {
         this.kassassaRahaa = 100000;
+        this.edulliset = 0;
+        this.maukkaat = 0;
     }
 
     public int syoEdullisesti(int maksu) {

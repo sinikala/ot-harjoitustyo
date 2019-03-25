@@ -50,4 +50,9 @@ public class MaksukorttiTest {
     public void otaRahaaPalauttaaFalseJosSaldoEiRiita() {
         assertFalse(kortti.otaRahaa(15));      
     }
+    
+    @Test
+    public void toStringTulostaaOikein(){
+        assertEquals("saldo: 0.10", kortti.toString());
+    }
 }
