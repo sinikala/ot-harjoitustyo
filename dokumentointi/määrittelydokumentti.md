@@ -4,7 +4,7 @@ Huom! Projektin aihetta vaihdettu realiteettisyistä 30.3.
 Vaatimuusmäärittelyt uudellenkirjoitettu vastaamaan muuttunutta aihetta 30.3.
 
 ## Sovelluksen tarkoitus
-Anagrammipeli: Sovelluksella voidaan ratkoa [anagarammeja](https://fi.wikipedia.org/wiki/Anagrammi) ja pitää kirjaa jo ratkaistuistujen anagrammien määrästä. 
+Anagrammipeli: Sovelluksella voidaan ratkoa [anagrammeja](https://fi.wikipedia.org/wiki/Anagrammi) ja pitää kirjaa jo ratkaistuistujen anagrammien määrästä. 
 
 ## Käyttäjäroolit
 Erillisiä käyttäjärooleja ei ole.
