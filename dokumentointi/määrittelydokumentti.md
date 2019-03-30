@@ -1,40 +1,32 @@
 # Vaativuusmäärittely
 
+Huom! Projektin aihetta vaihdettu realiteettisyistä 30.3.
+Vaatimuusmäärittelyt uudellenkirjoitettu vastaamaan muuttunutta aihetta 30.3.
+
 ## Sovelluksen tarkoitus
-Palapeli: Sovelluksella voidaan ratkoa palalejä ja pitää kirjaa nopeimmista
-ratkaisijoista.
+Anagrammipeli: Sovelluksella voidaan ratkoa [anagarammeja](https://fi.wikipedia.org/wiki/Anagrammi) ja pitää kirjaa jo ratkaistuistujen anagrammien määrästä. 
 
 ## Käyttäjäroolit
 Erillisiä käyttäjärooleja ei ole.
 
 ## Perusversion suunnitellut toiminallisuudet
-Sovelluksessa on viisi näkymää; aloitusnäkymä, pelinäkymä, ratkaistu-näkymä, 
-ratkaistu ennätysajassa -näkymä sekä high score -näkymä.
+* Pelissä pelaaja voi tallentaa käyttäjänimensä. 
+* Pelaaja voi kirjatua peliin käyttäjänimellään
+* Uusi pelaaja voi luoda käyttäjännimen
+* Peli pitää kirjaa kunkin pelaajan jo ratkaistuista anagrammeista, jotta peli ei tarjoa jo ratkaistua sanaa uudelleen.
+* Pelaaja voi tarkistaa montako sanaa hän on jo ratkaissut
+* Pelissä pelaaja voi veikata saamansa anagrammin vastausta tai
+* Pelaaja voi myös pyytää uuden anagrammin, vaikka ei olisi keksinyt nykyistä
+* Jokaisen oikean vastauksen jälkeen peli kertoo montako sanaa pelaaja on nyt ratkaissut
 
-* Alkunäkymä: Pelaaja voi valita vaihtoehdot "Aloita uusi peli" 
-	ja "Näytä high score". Kumpikin toiminto johtaa uuteen näkymään.
+### Suunnitellut näkymät
+* Kirjautumisnäkymä: Pelaaja joko luo uuden käyttäjänimen tai syöttää jo olemassaolevan
+* Pelinäkymä: Pelaajalle näytetään ratkaistava anagrammi, pelaaja syöttää arvauksensa ja tarkistaa sen tarkistus-napilla, 		vaihtoehtoisesti hän voi pyytää uuden sanan "yritä toista"-napilla. Näkymässä myös "katso tilasto"-nappi, josta 		pelaaja pääse tilastonäkymään.
+* Tilastonäkymä: Pelaaja näkee kuinka suuren osan sanoista hän on ratkaissut. Näkymään tulee mahdollisesti jokin visuaalinen 			havainnekuva, joka heijastaa etenemistä (mittari, kasvava kuva tms).
+* Loppunäkymä: Kun pelaaja on ratkaissut kaikki anagrammit hänet siirretään loppunäkymään, jossa onnitellaan pelin 			läpäisemisestä. 
 
-* Pelinäkymä: Valitsemalla uuden pelin, pelaaja pääsee ratkaisemaan palapeliä.
-	Näkymä alkaa valmiilla palapelillä. Painamalla "Sekoita!"-nappia, 
-	palat sekoittuvat ja ajastin alkaa. Pelaaja voi nyt ratkaista hiiren avulla
-	palapelin. Kun peli valmistuu, pelaaja pääse menestyksestään riippuen 
-	jompaankumpaan kahdesta ratkaisunäkymästä.
-
-* Ratkaistu-näkymä: Näkymässä onnitellaan pelaajaa ratkaisusta pelistä, näytetään
-	kulunut aika ja annetaan vaihtoehdot "Pelaa uusi peli", joka johtaa takaisin 
-	pelinäkymään ja uuteen peliin tai "Katso ennätykset", jota painamalla pelaaja
-	pääse high score -näkymään.
-
-* Ratkaistu ennätysajassa -näkymä: Mikäli palapelin ratkaisuaika oli tarpeeksi 
-	nopea päästäkseen enäätyslistalle, kysytään käyttäjältä nimimerkkiä, 
-	joka liitetään ennätysaikaan. Muuten samat toiminnot kuin Ratkaisu-näkymässä.
-
-* High score -näkymä: Pelaaja näkee listauksen parhaista ratkaisuajoista ja ne 
-	tehneiden pelaajien nimimerkeistä. Myös tässä näkymässä nappi "Aloita 
-	uusi peli".
 
 ## Laajentavat jatkokehitysideat
 Näitä toteutetaan mahdollisuuksien mukaan:
-* Palapelille voi valita vaikeustason
-* Eri vaikeustasoille omat high score -listansa.
-* Pelaajja voi valita saman pelin heti uudelleen (replay)
+* Pelaaja voi tarkastella määrän lisäksi myös ratkaistuja sanoja
+* Pelaaja saa vihjeen halutessaan (tietyn kirjaimen sijainti)
