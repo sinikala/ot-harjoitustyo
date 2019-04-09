@@ -16,15 +16,19 @@ Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksel
 #### Testaus
 Testit suoritetaan komennolla
 ````
-`mvn test`
+mvn test
 ````
 
 Testikattavuusraportti luodaan komennolla
-`mvn jacoco:report`
+````
+mvn jacoco:report
+````
 
-Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto target/site/jacoco/index.html
+Kattavuusraporttia voi tarkastella avaamalla selaimella tiedosto _target/site/jacoco/index.html_
 
 #### Checkstyle
 Tiedostoon checkstyle.xml määrittelemät tarkistukset suoritetaan komennolla
-`mvn jxr:jxr checkstyle:checkstyle`
-Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto target/site/checkstyle.html
+````
+mvn jxr:jxr checkstyle:checkstyle
+````
+Mahdolliset virheilmoitukset selviävät avaamalla selaimella tiedosto _target/site/checkstyle.html_
