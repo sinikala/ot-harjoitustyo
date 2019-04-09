@@ -49,28 +49,27 @@ public class Main extends Application {
 
         gameBox.getChildren().addAll(gameInstructions, anagramm, guess, check, feedback);
         gameLayout.setTop(gameBox);
-        
+
         BorderPane doneLayout = new BorderPane();
         VBox doneBox = new VBox();
         doneBox.setPadding(new Insets(40, 80, 40, 80));
-        Label congrats = new Label("Olet ratkaissut kaikki anagrammit! Hyvää työtä!"); 
+        Label congrats = new Label("Olet ratkaissut kaikki anagrammit! Hyvää työtä!");
         doneBox.getChildren().addAll(congrats);
         doneLayout.setTop(doneBox);
-        
-        
+
         Scene gameScene = new Scene(gameLayout);
         Scene welcomeScene = new Scene(welcomeLayout);
         Scene allDone = new Scene(doneLayout);
-        
+
         play.setOnAction((event) -> {
             window.setScene(gameScene);
             anagramm.setText(user.pickWordToSolve());
         });
-        check.setOnAction((event) ->{
-            if(user.check(guess.getText())){
+        check.setOnAction((event) -> {
+            if (user.check(guess.getText())) {
                 feedback.setText("Oikein!");
-                user.setSolved(); 
-                if(user.pickWordToSolve().equals("X")){
+                user.setSolved();
+                if (user.pickWordToSolve().equals("X")) {
                     window.setScene(allDone);
                 }
                 anagramm.setText(user.pickWordToSolve());
@@ -85,7 +84,6 @@ public class Main extends Application {
         window.setTitle("ANAGRAMMIPELI");
         window.show();
     }
-
 
     public static void main(String[] args) {
         launch(Main.class);

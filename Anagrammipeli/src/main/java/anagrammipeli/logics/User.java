@@ -38,14 +38,16 @@ public class User {
     public String getName() {
         return name;
     }
-    
-    public boolean check(String guess){
+
+    public boolean check(String guess) {
         return library.isCorrect(index, guess);
     }
 
     public String pickWordToSolve() {
-        if(solved==isSolved.length){return "X";}
-        
+        if (solved == isSolved.length) {
+            return "X";
+        }
+
         Random random = new Random();
         index = -1;
         while (true) {

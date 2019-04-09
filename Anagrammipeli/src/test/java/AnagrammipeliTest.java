@@ -19,27 +19,28 @@ import java.util.*;
  * @author sinikala
  */
 public class AnagrammipeliTest {
+
     GameLibrary library;
     User user;
-    
+
     public AnagrammipeliTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
 
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
-       library = new GameLibrary();
-       user = new User("Tes T. User ");
+        library = new GameLibrary();
+        user = new User("Tes T. User ");
     }
-    
+
     @After
     public void tearDown() {
     }
@@ -49,30 +50,29 @@ public class AnagrammipeliTest {
     //
     // @Test
     // public void hello() {}
-    
     @Test
-    public void wordListSizeEqualsScrambledWordListSize(){
+    public void wordListSizeEqualsScrambledWordListSize() {
         assertEquals(library.getWordListSize(), library.getScrambledWordListSize());
     }
-    
+
     @Test
-    public void wordAndScrambledWordHaveSameIndex(){
+    public void wordAndScrambledWordHaveSameIndex() {
         char[] word = library.getWord(1).toCharArray();
         char[] scrambled = library.getScrambledWord(1).toCharArray();
         Arrays.sort(word);
         Arrays.sort(scrambled);
-        
+
         assertTrue(Arrays.equals(word, scrambled));
-        
+
     }
-    
+
     @Test
-    public void userStartsWithZeroSolvedWords(){
+    public void userStartsWithZeroSolvedWords() {
         assertEquals(0, user.getNumberOfSolvedWords());
     }
-    
+
     @Test
-    public void userStartsWithAllFalseInIsSolved(){
+    public void userStartsWithAllFalseInIsSolved() {
         assertFalse(user.checkIfSolved(0));
     }
 }
