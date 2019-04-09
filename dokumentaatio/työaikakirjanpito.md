@@ -5,4 +5,5 @@ Päivä | Aika | Mitä tein
 26.3. | 2 | Taustatutkimus, määrittelydokumentti
 30.3.| 3 | Aiheenvaihdos, alustavan ohjelmanrungon totetutus, muutama testi, määrittelydokumentin uudelleenkirjoitus
 2.4. | 0.5 | jacoco-plugin lisätty, testattu toimivuutta komentoriviltä, viikon 3 vaatimusten hionta
-yht|   | tuntia
+9.4 | 5.5 | Graafinen UI alkuun, checkstyle-konfiguraatiot, pakkauskaavio, readme:n täydennys
+yht|  11 | tuntia
