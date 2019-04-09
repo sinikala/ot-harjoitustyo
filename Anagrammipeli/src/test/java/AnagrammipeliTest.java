@@ -10,8 +10,8 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import static org.junit.Assert.*;
-import anagrammipeli.library.GameLibrary;
-import anagrammipeli.library.User;
+import anagrammipeli.logics.GameLibrary;
+import anagrammipeli.logics.User;
 import java.util.*;
 
 /**
@@ -37,7 +37,7 @@ public class AnagrammipeliTest {
     @Before
     public void setUp() {
        library = new GameLibrary();
-       user = new User("Tes T. User " ,5);
+       user = new User("Tes T. User ");
     }
     
     @After

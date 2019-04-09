@@ -1,6 +1,6 @@
-package anagrammipeli.library;
+package anagrammipeli.logics;
 
-import anagrammipeli.library.GameLibrary;
+import anagrammipeli.logics.GameLibrary;
 import java.util.Random;
 
 public class User {
@@ -8,15 +8,18 @@ public class User {
     private String name;
     private boolean[] isSolved;
     private int solved;
+    GameLibrary library;
+    int index;
 
-    public User(String name, int solvableWords) {
+    public User(String name) {
+        this.library = new GameLibrary();
         this.name = name;
         this.solved = 0;
-        this.isSolved = new boolean[solvableWords];
+        this.isSolved = new boolean[library.getWordListSize()];
     }
 
-    public void setSolved(int idx) {
-        isSolved[idx] = true;
+    public void setSolved() {
+        isSolved[index] = true;
         solved++;
     }
 
@@ -35,19 +38,24 @@ public class User {
     public String getName() {
         return name;
     }
+    
+    public boolean check(String guess){
+        return library.isCorrect(index, guess);
+    }
 
-    public int pickUnsolvedWordIndex() {
-        if(solved==isSolved.length){return -1;}
+    public String pickWordToSolve() {
+        if(solved==isSolved.length){return "X";}
         
         Random random = new Random();
-        int index = -1;
+        index = -1;
         while (true) {
             index = random.nextInt(isSolved.length);
             if (isSolved[index] == false) {
                 break;
             }
         }
-        return index;
+        String word = library.getScrambledWord(index);
+        return word;
     }
 
 }

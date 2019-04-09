@@ -1,4 +1,5 @@
-package anagrammipeli.library;
+package anagrammipeli.logics;
+import anagrammipeli.logics.User;
 
 import java.util.Random;
 
