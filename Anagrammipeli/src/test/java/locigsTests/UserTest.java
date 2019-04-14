@@ -76,5 +76,12 @@ public class UserTest {
         assertEquals(expected, user.getPercentage(), DELTA);
     }
 
-
+    @Test
+    public void pickWordToSolveReturnsXWhenAllSolved(){
+        for (int i = 0; i < library.getWordListSize(); i++) {
+            user.setSolved();
+        }
+        assertEquals("X", user.pickWordToSolve());
+        
+    }
 }
