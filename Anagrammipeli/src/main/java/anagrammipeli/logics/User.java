@@ -16,6 +16,7 @@ public class User {
         this.name = name;
         this.solved = 0;
         this.isSolved = new boolean[library.getWordListSize()];
+        this.index = 0;
     }
 
     public void setSolved() {
@@ -32,12 +33,20 @@ public class User {
     }
 
     public String getScore() {
-        return "Olet nyt ratkaissut " + "\n" +  solved + "/" + isSolved.length + " sanaa.";
+        return "Olet nyt ratkaissut "+ "\n"  + solved + "/" + isSolved.length + " sanaa.";
+    }
+
+    public double getPercentage() {
+        if (solved == 0) {
+            return 0;
+        }
+        return (solved * 1.0)/isSolved.length *100;
     }
 
     public String getName() {
         return name;
     }
+   
 
     public boolean check(String guess) {
         return library.isCorrect(index, guess);
@@ -49,7 +58,7 @@ public class User {
         }
 
         Random random = new Random();
-        index = -1;
+        
         while (true) {
             index = random.nextInt(isSolved.length);
             if (isSolved[index] == false) {
