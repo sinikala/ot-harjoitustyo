@@ -10,6 +10,10 @@ Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksel
 
 [Arkkitehtuurikuvaus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
+## Releaset
+[Viikko 5](https://github.com/sinikala/ot-harjoitustyo/releases)
+
+
 ## Komentorivikomennot
 
 
