@@ -42,12 +42,16 @@ public class Main extends Application {
         gameBox.setSpacing(10);
         Label gameInstructions = new Label("Tässä anagrammisi:");
         Label anagramm = new Label(" ");
-        TextField guess = new TextField();
+        TextField userGuess = new TextField();
+        HBox options = new HBox();
+        options.setSpacing(10);
         Button check = new Button("Tarkista");
-        Label feedback = new Label(" ");
         Button newWord = new Button("Uusi sana");
+        options.getChildren().addAll(check, newWord);
+        Label feedback = new Label(" ");
+        feedback.setMinSize(200, 10);
 
-        gameBox.getChildren().addAll(gameInstructions, anagramm, guess, check, feedback);
+        gameBox.getChildren().addAll(gameInstructions, anagramm, userGuess, options, feedback);
         gameLayout.setTop(gameBox);
 
         BorderPane doneLayout = new BorderPane();
@@ -66,18 +70,23 @@ public class Main extends Application {
             anagramm.setText(user.pickWordToSolve());
         });
         check.setOnAction((event) -> {
-            if (user.check(guess.getText())) {
-                feedback.setText("Oikein!");
+            if (user.check(userGuess.getText())) {
                 user.setSolved();
+                feedback.setText("Oikein! " + user.getScore());
                 if (user.pickWordToSolve().equals("X")) {
                     window.setScene(allDone);
                 }
                 anagramm.setText(user.pickWordToSolve());
-                guess.clear();
             } else {
                 feedback.setText("Yritä uudelleen.");
-                guess.clear();
+               
             }
+            userGuess.clear();
+            userGuess.requestFocus();
+        });
+        newWord.setOnAction((event) -> {
+            anagramm.setText(user.pickWordToSolve());
+            userGuess.clear();
         });
 
         window.setScene(welcomeScene);

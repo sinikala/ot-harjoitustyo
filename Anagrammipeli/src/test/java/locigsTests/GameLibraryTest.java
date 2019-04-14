@@ -1,8 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+package locigsTests;
+
+
 
 import org.junit.After;
 import org.junit.AfterClass;
@@ -14,16 +12,12 @@ import anagrammipeli.logics.GameLibrary;
 import anagrammipeli.logics.User;
 import java.util.*;
 
-/**
- *
- * @author sinikala
- */
-public class AnagrammipeliTest {
+
+public class GameLibraryTest {
 
     GameLibrary library;
-    User user;
 
-    public AnagrammipeliTest() {
+    public GameLibraryTest() {
     }
 
     @BeforeClass
@@ -38,18 +32,12 @@ public class AnagrammipeliTest {
     @Before
     public void setUp() {
         library = new GameLibrary();
-        user = new User("Tes T. User ");
     }
 
     @After
     public void tearDown() {
     }
 
-    // TODO add test methods here.
-    // The methods must be annotated with annotation @Test. For example:
-    //
-    // @Test
-    // public void hello() {}
     @Test
     public void wordListSizeEqualsScrambledWordListSize() {
         assertEquals(library.getWordListSize(), library.getScrambledWordListSize());
@@ -66,13 +54,5 @@ public class AnagrammipeliTest {
 
     }
 
-    @Test
-    public void userStartsWithZeroSolvedWords() {
-        assertEquals(0, user.getNumberOfSolvedWords());
-    }
-
-    @Test
-    public void userStartsWithAllFalseInIsSolved() {
-        assertFalse(user.checkIfSolved(0));
-    }
+   
 }

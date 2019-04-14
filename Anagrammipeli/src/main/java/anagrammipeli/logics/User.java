@@ -32,7 +32,7 @@ public class User {
     }
 
     public String getScore() {
-        return "Olet nyt ratkaissut " + solved + "/" + isSolved.length + "sanaa.";
+        return "Olet nyt ratkaissut " + "\n" +  solved + "/" + isSolved.length + " sanaa.";
     }
 
     public String getName() {
