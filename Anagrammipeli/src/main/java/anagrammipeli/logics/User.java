@@ -33,20 +33,19 @@ public class User {
     }
 
     public String getScore() {
-        return "Olet nyt ratkaissut "+ "\n"  + solved + "/" + isSolved.length + " sanaa.";
+        return "Olet nyt ratkaissut " + "\n" + solved + "/" + isSolved.length + " sanaa.";
     }
 
     public double getPercentage() {
         if (solved == 0) {
             return 0;
         }
-        return (solved * 1.0)/isSolved.length *100;
+        return (solved * 1.0) / isSolved.length * 100;
     }
 
     public String getName() {
         return name;
     }
-   
 
     public boolean check(String guess) {
         return library.isCorrect(index, guess);
@@ -58,7 +57,7 @@ public class User {
         }
 
         Random random = new Random();
-        
+
         while (true) {
             index = random.nextInt(isSolved.length);
             if (isSolved[index] == false) {

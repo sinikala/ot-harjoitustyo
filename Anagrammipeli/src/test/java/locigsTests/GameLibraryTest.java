@@ -54,11 +54,11 @@ public class GameLibraryTest {
 
     @Test
     public void wordListIsNotEmpty() {
-        assertTrue(library.getWordListSize()!=0);
+        assertTrue(library.getWordListSize() != 0);
     }
-    
+
     @Test
     public void scrambledWordListIsNotEmpty() {
-        assertTrue(library.getScrambledWordListSize()!=0);
+        assertTrue(library.getScrambledWordListSize() != 0);
     }
 }

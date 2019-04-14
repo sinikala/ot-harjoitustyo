@@ -1,7 +1,5 @@
 package locigsTests;
 
-
-
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -13,32 +11,33 @@ import anagrammipeli.logics.User;
 import java.util.*;
 
 public class UserTest {
+
     User user;
     GameLibrary library;
     private static final double DELTA = 0.01;
-    
+
     public UserTest() {
     }
-    
+
     @BeforeClass
     public static void setUpClass() {
     }
-    
+
     @AfterClass
     public static void tearDownClass() {
     }
-    
+
     @Before
     public void setUp() {
         user = new User("Tes T. User");
         library = new GameLibrary();
     }
-    
+
     @After
     public void tearDown() {
     }
-    
-     @Test
+
+    @Test
     public void userStartsWithZeroSolvedWords() {
         assertEquals(0, user.getNumberOfSolvedWords());
     }
@@ -47,41 +46,41 @@ public class UserTest {
     public void userStartsWithAllFalseInIsSolved() {
         assertFalse(user.checkIfSolved(0));
     }
-    
+
     @Test
-    public void userStartsWithZeroPercentage(){
+    public void userStartsWithZeroPercentage() {
         assertEquals(0.0, user.getPercentage(), DELTA);
     }
-    
+
     @Test
-    public void startingScoreReporstZero(){
-        assertEquals("Olet nyt ratkaissut " + "\n" + "0/" + library.getWordListSize()  +" sanaa.", user.getScore());
+    public void startingScoreReporstZero() {
+        assertEquals("Olet nyt ratkaissut " + "\n" + "0/" + library.getWordListSize() + " sanaa.", user.getScore());
     }
-    
+
     @Test
-    public void userNameIsCorrect(){
+    public void userNameIsCorrect() {
         assertEquals("Tes T. User", user.getName());
     }
-    
+
     @Test
-    public void setSolvedWorks(){
+    public void setSolvedWorks() {
         user.setSolved();
         assertEquals(1, user.getNumberOfSolvedWords());
     }
-    
+
     @Test
-    public void solvingWordsRaisesPercentage(){
-        double expected = 1.0/library.getWordListSize()*100;
+    public void solvingWordsRaisesPercentage() {
+        double expected = 1.0 / library.getWordListSize() * 100;
         user.setSolved();
         assertEquals(expected, user.getPercentage(), DELTA);
     }
 
     @Test
-    public void pickWordToSolveReturnsXWhenAllSolved(){
+    public void pickWordToSolveReturnsXWhenAllSolved() {
         for (int i = 0; i < library.getWordListSize(); i++) {
             user.setSolved();
         }
         assertEquals("X", user.pickWordToSolve());
-        
+
     }
 }

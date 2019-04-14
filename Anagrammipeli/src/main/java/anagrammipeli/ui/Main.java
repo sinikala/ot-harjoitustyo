@@ -38,7 +38,7 @@ public class Main extends Application {
             user = new User(nameField.getText());
             box.getChildren().removeAll(nameField, nameOk);
             box.getChildren().addAll(play);
-            
+
         });
 
         BorderPane gameLayout = new BorderPane();
@@ -69,8 +69,6 @@ public class Main extends Application {
         doneBox.getChildren().addAll(congrats);
         doneLayout.setTop(doneBox);
 
-
-
         BorderPane scoreLayout = new BorderPane();
         scoreLayout.setPadding(new Insets(10));
         VBox scoreBox = new VBox();
@@ -78,9 +76,6 @@ public class Main extends Application {
         scoreBox.setSpacing(10);
         Label scoreNow = new Label("Olet ratkaissut 0.0 % sanoista!");
         Button backToGame = new Button("Takaisin");
-//        Image thumbsUp = new Image("thumbsup.png");
-//        ImageView imageView = new ImageView();
-//        imageView.setImage(thumbsUp);
         scoreBox.getChildren().addAll(scoreNow, backToGame);
         scoreLayout.setTop(scoreBox);
 
