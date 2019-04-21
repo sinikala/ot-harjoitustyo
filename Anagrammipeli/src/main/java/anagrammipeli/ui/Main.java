@@ -2,6 +2,8 @@ package anagrammipeli.ui;
 
 import anagrammipeli.logics.GameLibrary;
 import anagrammipeli.logics.User;
+import anagrammipeli.dao.UserDao;
+import java.sql.*;
 import java.util.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
@@ -142,8 +144,18 @@ public class Main extends Application {
         window.show();
     }
 
-    public static void main(String[] args) {
-        launch(Main.class);
+    public static void main(String[] args) throws Exception {
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
+        Statement stmt = connection.createStatement();
+        ResultSet rs = stmt.executeQuery("SELECT 1");
+
+        if (rs.next()) {
+            System.out.println("Toimii");
+        } else {
+            System.out.println(":(");
+        }
+
+        //launch(Main.class);
     }
 
     private void setPercentage(Label scoreNow) {
