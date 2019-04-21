@@ -7,5 +7,6 @@ Päivä | Aika | Mitä tein
 2.4. | 0.5 | jacoco-plugin lisätty, testattu toimivuutta komentoriviltä, viikon 3 vaatimusten hionta
 9.4. | 5.5 | Graafinen UI alkuun, checkstyle-konfiguraatiot, pakkauskaavio, readme:n täydennys
 14.4.| 5 | Lisää toiminnallisuutta ja testejä, jar-paketti, 1. release
-16.4.| 1| Sekvenssikaavio, readme:n täydennys
-**yht.**|  **17** | **tuntia**
+16.4.| 1 | Sekvenssikaavio, readme:n täydennys
+21.4. | 1 | Tietokannan alustus, sql-ajurin ja UserDao-luokan lisäys
+**yht.**|  **18** | **tuntia**
