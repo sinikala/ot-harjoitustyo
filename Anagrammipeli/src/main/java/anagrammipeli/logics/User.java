@@ -9,19 +9,26 @@ public class User {
     private boolean[] isSolved;
     private int solved;
     GameLibrary library;
-    int index;
+    int wordIndex;
+    int playerIndex;
 
-    public User(String name) {
+    public User(String name, int playerIndex) {
         this.library = new GameLibrary();
         this.name = name;
         this.solved = 0;
         this.isSolved = new boolean[library.getWordListSize()];
-        this.index = 0;
+        this.wordIndex = 0;
+        this.playerIndex = playerIndex;
+
     }
 
     public void setSolved() {
-        isSolved[index] = true;
+        isSolved[wordIndex] = true;
         solved++;
+    }
+    
+    public void setPreviouslySolvedWords(int index){
+        isSolved[index]=true;
     }
 
     public int getNumberOfSolvedWords() {
@@ -48,7 +55,7 @@ public class User {
     }
 
     public boolean check(String guess) {
-        return library.isCorrect(index, guess);
+        return library.isCorrect(wordIndex, guess);
     }
 
     public String pickWordToSolve() {
@@ -59,12 +66,12 @@ public class User {
         Random random = new Random();
 
         while (true) {
-            index = random.nextInt(isSolved.length);
-            if (isSolved[index] == false) {
+            wordIndex = random.nextInt(isSolved.length);
+            if (isSolved[wordIndex] == false) {
                 break;
             }
         }
-        String word = library.getScrambledWord(index);
+        String word = library.getScrambledWord(wordIndex);
         return word;
     }
 

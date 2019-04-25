@@ -1,16 +1,13 @@
 package anagrammipeli.ui;
 
-import anagrammipeli.logics.GameLibrary;
-import anagrammipeli.logics.User;
-import anagrammipeli.dao.UserDao;
-import java.sql.*;
+import anagrammipeli.logics.*;
+import anagrammipeli.dao.*;
 import java.util.*;
 import javafx.application.Application;
 import javafx.geometry.Insets;
 import javafx.scene.*;
 import javafx.scene.control.*;
 import javafx.scene.image.*;
-
 import javafx.scene.input.KeyCode;
 import javafx.scene.layout.*;
 import javafx.stage.Stage;
@@ -19,9 +16,19 @@ public class Main extends Application {
 
     User user;
     double percentage;
+    GameService service;
+    String currentWord;
+   
+
+//    @Override
+//    public void init() throws Exception {
+//        
+//    }
 
     @Override
     public void start(Stage window) throws Exception {
+        GameService service = new GameService();
+        User user = null;
         BorderPane welcomeLayout = new BorderPane();
         VBox box = new VBox();
         box.setPadding(new Insets(50, 100, 50, 100));
@@ -35,13 +42,7 @@ public class Main extends Application {
         box.getChildren().addAll(instructions, nameField, nameOk);
         welcomeLayout.setTop(box);
 
-        nameOk.setOnAction((event) -> {
-            instructions.setText("Tervetuloa " + nameField.getText() + "!");
-            user = new User(nameField.getText());
-            box.getChildren().removeAll(nameField, nameOk);
-            box.getChildren().addAll(play);
-
-        });
+        
 
         BorderPane gameLayout = new BorderPane();
         gameLayout.setPadding(new Insets(10));
@@ -85,38 +86,53 @@ public class Main extends Application {
         Scene welcomeScene = new Scene(welcomeLayout);
         Scene allDone = new Scene(doneLayout);
         Scene scoreScene = new Scene(scoreLayout);
+        
+        nameOk.setOnAction((event) -> {
+            try {
+                String text = nameField.getText();
+                service.setUser(text);    
+                instructions.setText("Tervetuloa " + nameField.getText() + "!");
+                box.getChildren().removeAll(nameField, nameOk);
+                box.getChildren().add(play);
+            } catch (Exception e) {
+            }
+
+        });
 
         play.setOnAction((event) -> {
             window.setScene(gameScene);
-            anagramm.setText(user.pickWordToSolve());
+            currentWord =service.getWord();
+            anagramm.setText(currentWord);
         });
 
-        //Miten poistaa toisteisuus??
-//        userGuess.setOnKeyPressed((event) -> {
-//            if(event.getCode() == KeyCode.ENTER){
-//                if (user.check(userGuess.getText())) {
+//        //Miten poistaa toisteisuus??
+////        userGuess.setOnKeyPressed((event) -> {
+////            if(event.getCode() == KeyCode.ENTER){
+////                if (user.check(userGuess.getText())) {
+////                user.setSolved();
+////                feedback.setText("Oikein! " + user.getScore());
+////                if (user.pickWordToSolve().equals("X")) {
+////                    window.setScene(allDone);
+////                }
+////                anagramm.setText(user.pickWordToSolve());
+////            } else {
+////                feedback.setText("Yritä uudelleen.");
+////               
+////            }
+////            userGuess.clear();
+////            userGuess.requestFocus();
+////            }
+////        });
+
+        check.setOnAction((event) -> {
+//            if (user.check(userGuess.getText())) {
 //                user.setSolved();
 //                feedback.setText("Oikein! " + user.getScore());
 //                if (user.pickWordToSolve().equals("X")) {
 //                    window.setScene(allDone);
 //                }
 //                anagramm.setText(user.pickWordToSolve());
-//            } else {
-//                feedback.setText("Yritä uudelleen.");
-//               
-//            }
-//            userGuess.clear();
-//            userGuess.requestFocus();
-//            }
-//        });
-        check.setOnAction((event) -> {
-            if (user.check(userGuess.getText())) {
-                user.setSolved();
-                feedback.setText("Oikein! " + user.getScore());
-                if (user.pickWordToSolve().equals("X")) {
-                    window.setScene(allDone);
-                }
-                anagramm.setText(user.pickWordToSolve());
+            if (service.check(userGuess.getText())){
             } else {
                 feedback.setText("Yritä uudelleen.");
 
@@ -124,20 +140,21 @@ public class Main extends Application {
             userGuess.clear();
             userGuess.requestFocus();
         });
-        newWord.setOnAction((event) -> {
-            anagramm.setText(user.pickWordToSolve());
-            userGuess.clear();
-        });
-
-        scores.setOnAction((event) -> {
-            setPercentage(scoreNow);
-            window.setScene(scoreScene);
-        });
-
-        backToGame.setOnAction((event) -> {
-            window.setScene(gameScene);
-            feedback.setText(" ");
-        });
+        
+//        newWord.setOnAction((event) -> {
+//            anagramm.setText(user.pickWordToSolve());
+//            userGuess.clear();
+//        });
+//
+//        scores.setOnAction((event) -> {
+//            setPercentage(scoreNow);
+//            window.setScene(scoreScene);
+//        });
+//
+//        backToGame.setOnAction((event) -> {
+//            window.setScene(gameScene);
+//            feedback.setText(" ");
+//        });
 
         window.setScene(welcomeScene);
         window.setTitle("ANAGRAMMIPELI");
@@ -145,22 +162,12 @@ public class Main extends Application {
     }
 
     public static void main(String[] args) throws Exception {
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
-        Statement stmt = connection.createStatement();
-        ResultSet rs = stmt.executeQuery("SELECT 1");
-
-        if (rs.next()) {
-            System.out.println("Toimii");
-        } else {
-            System.out.println(":(");
-        }
-
-        //launch(Main.class);
+        launch(Main.class);
     }
 
-    private void setPercentage(Label scoreNow) {
-        double percentage = user.getPercentage();
-        scoreNow.setText("Olet ratkaissut " + percentage + " % sanoista!");
-    }
+//    private void setPercentage(Label scoreNow) {
+//        double percentage = user.getPercentage();
+//        scoreNow.setText("Olet ratkaissut " + percentage + " % sanoista!");
+//    }
 
 }
