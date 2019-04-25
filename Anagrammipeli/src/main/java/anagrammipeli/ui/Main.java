@@ -18,13 +18,11 @@ public class Main extends Application {
     double percentage;
     GameService service;
     String currentWord;
-   
 
 //    @Override
 //    public void init() throws Exception {
 //        
 //    }
-
     @Override
     public void start(Stage window) throws Exception {
         GameService service = new GameService();
@@ -42,8 +40,6 @@ public class Main extends Application {
         box.getChildren().addAll(instructions, nameField, nameOk);
         welcomeLayout.setTop(box);
 
-        
-
         BorderPane gameLayout = new BorderPane();
         gameLayout.setPadding(new Insets(10));
         VBox gameBox = new VBox();
@@ -54,10 +50,10 @@ public class Main extends Application {
         TextField userGuess = new TextField();
         HBox options = new HBox();
         options.setSpacing(10);
-        Button check = new Button("Tarkista");
+        Button checkButton = new Button("Tarkista");
         Button newWord = new Button("Uusi sana");
         Button scores = new Button("Missä mennään?");
-        options.getChildren().addAll(check, newWord);
+        options.getChildren().addAll(checkButton, newWord);
         Label feedback = new Label(" ");
         feedback.setMinSize(200, 50);
 
@@ -86,11 +82,11 @@ public class Main extends Application {
         Scene welcomeScene = new Scene(welcomeLayout);
         Scene allDone = new Scene(doneLayout);
         Scene scoreScene = new Scene(scoreLayout);
-        
+
         nameOk.setOnAction((event) -> {
             try {
                 String text = nameField.getText();
-                service.setUser(text);    
+                service.setUser(text);
                 instructions.setText("Tervetuloa " + nameField.getText() + "!");
                 box.getChildren().removeAll(nameField, nameOk);
                 box.getChildren().add(play);
@@ -101,46 +97,51 @@ public class Main extends Application {
 
         play.setOnAction((event) -> {
             window.setScene(gameScene);
-            currentWord =service.getWord();
+            currentWord = service.getWord();
             anagramm.setText(currentWord);
         });
 
 //        //Miten poistaa toisteisuus??
-////        userGuess.setOnKeyPressed((event) -> {
-////            if(event.getCode() == KeyCode.ENTER){
-////                if (user.check(userGuess.getText())) {
-////                user.setSolved();
-////                feedback.setText("Oikein! " + user.getScore());
-////                if (user.pickWordToSolve().equals("X")) {
-////                    window.setScene(allDone);
-////                }
-////                anagramm.setText(user.pickWordToSolve());
-////            } else {
-////                feedback.setText("Yritä uudelleen.");
-////               
-////            }
-////            userGuess.clear();
-////            userGuess.requestFocus();
-////            }
-////        });
+        userGuess.setOnKeyPressed((event) -> {
+            if (event.getCode() == KeyCode.ENTER) {
+                try {
+                    if (service.check(userGuess.getText())) {
+                        service.setSolved();
+                        feedback.setText("Oikein! " + service.getScore());
+                        if (service.allDone()) {
+                            window.setScene(allDone);
+                        }
+                        service.getWord();
+                    } else {
+                        feedback.setText("Yritä uudelleen.");
 
-        check.setOnAction((event) -> {
-//            if (user.check(userGuess.getText())) {
-//                user.setSolved();
-//                feedback.setText("Oikein! " + user.getScore());
-//                if (user.pickWordToSolve().equals("X")) {
-//                    window.setScene(allDone);
-//                }
-//                anagramm.setText(user.pickWordToSolve());
-            if (service.check(userGuess.getText())){
-            } else {
-                feedback.setText("Yritä uudelleen.");
-
+                    }
+                    userGuess.clear();
+                    userGuess.requestFocus();
+                } catch (Exception e) {
+                }
             }
-            userGuess.clear();
-            userGuess.requestFocus();
         });
-        
+
+        checkButton.setOnAction((event) -> {
+            try {
+                if (service.check(userGuess.getText())) {
+                    service.setSolved();
+                    feedback.setText("Oikein! " + service.getScore());
+                    if (service.allDone()) {
+                        window.setScene(allDone);
+                    }
+                    service.getWord();
+                } else {
+                    feedback.setText("Yritä uudelleen.");
+
+                }
+                userGuess.clear();
+                userGuess.requestFocus();
+            } catch (Exception e) {
+            }
+        });
+
 //        newWord.setOnAction((event) -> {
 //            anagramm.setText(user.pickWordToSolve());
 //            userGuess.clear();
@@ -155,7 +156,6 @@ public class Main extends Application {
 //            window.setScene(gameScene);
 //            feedback.setText(" ");
 //        });
-
         window.setScene(welcomeScene);
         window.setTitle("ANAGRAMMIPELI");
         window.show();
@@ -169,5 +169,4 @@ public class Main extends Application {
 //        double percentage = user.getPercentage();
 //        scoreNow.setText("Olet ratkaissut " + percentage + " % sanoista!");
 //    }
-
 }

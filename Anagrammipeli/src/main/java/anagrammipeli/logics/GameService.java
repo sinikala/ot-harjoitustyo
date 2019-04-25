@@ -17,7 +17,7 @@ public class GameService {
     public void setUser(String text) throws Exception {
         if (userDao.checkIfOldUser(text)) {
             user = userDao.getOldUser(text);
-            userDao.setOldPlayerSolvedList();
+            userDao.setOldPlayerSolvedList(user);
         } else {
             user = userDao.create(text);
         }
@@ -28,15 +28,24 @@ public class GameService {
     public String getWord() {
         return user.pickWordToSolve();
     }
-    
-    public boolean check(String guess){
-        
-        
-        
-        
+
+    public boolean check(String guess) {
+        return user.check(guess);
+    }
+
+    public boolean allDone() {
+        // on ko kaikki ratkaistu
+
         return false;
     }
 
-    
+    public void setSolved() throws Exception{
+        userDao.addSolvedWord(user);
+       
+    }
+
+    public String getScore() {
+        return user.getScore();
+    }
 
 }

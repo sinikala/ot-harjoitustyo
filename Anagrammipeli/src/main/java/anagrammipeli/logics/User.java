@@ -34,6 +34,14 @@ public class User {
     public int getNumberOfSolvedWords() {
         return solved;
     }
+    
+    public int getWordIndex(){
+        return wordIndex;
+    }
+    
+    public void setSolved(int solvedBefore){
+        solved += solvedBefore;
+    }
 
     public boolean checkIfSolved(int idx) {
         return isSolved[idx];

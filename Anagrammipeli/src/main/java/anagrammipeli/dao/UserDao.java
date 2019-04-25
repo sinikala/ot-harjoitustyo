@@ -7,31 +7,46 @@ import anagrammipeli.logics.GameLibrary;
 
 public class UserDao implements Dao {
 
-    private User user;
+ 
     private int playerId;
 
     public UserDao() throws Exception {
     }
     
-    public void setOldPlayerSolvedList() throws Exception {
+    public void setOldPlayerSolvedList(User user) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("SELECT * FROM solvedWords WHERE player_id = ?");
         st.setInt(1, playerId);
 
         ResultSet rs = st.executeQuery();
         
+        int wordCounter = 0;
         while(rs.next()){
             user.setPreviouslySolvedWords(rs.getInt("word_index"));
+            wordCounter++;
         }
         
         st.close();
         rs.close();
         connection.close();
+        user.setPreviouslySolvedWords(wordCounter);
     }
 
+    
+    
     @Override
-    public void addSolvedWord(int wordIndex) throws Exception {
+    public void addSolvedWord(User user) throws Exception {
+        int solvedWordIndex = user.getWordIndex();
+        
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
+        PreparedStatement st = connection.prepareStatement("INSERT INTO solvedWords (player_id, word_index) VALUES (?, ?)");
+        
+        st.setInt(1, playerId);
+        st.setInt(2, solvedWordIndex);
+        st.executeUpdate();
+        st.close();
 
+        user.setSolved();
     }
 
     @Override
@@ -42,7 +57,7 @@ public class UserDao implements Dao {
     public boolean checkIfOldUser(String text) throws Exception {
         //tarkista löytyykö tietokannasta
 
-        // !!! Useamman samannimisen estämäminen!!! 
+        // !!! Useamman samannimisen estäminen!!! 
         
         
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
@@ -74,7 +89,7 @@ public class UserDao implements Dao {
         ResultSet rs = st.executeQuery();
         rs.next();
 
-        user = new User(rs.getString("name"), rs.getInt("id"));
+       User user = new User(rs.getString("name"), rs.getInt("id"));
 
         st.close();
         rs.close();
@@ -86,7 +101,6 @@ public class UserDao implements Dao {
     @Override
     public User create(String text) throws Exception {
         //luo tietokantaan uusi käyttäjä
-        System.out.println("create");
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("INSERT INTO Player (name) VALUES (?)");
         
@@ -100,7 +114,7 @@ public class UserDao implements Dao {
         ResultSet rs = st.executeQuery();
         rs.next();
 
-        user = new User(text, rs.getInt("id"));
+         User user = new User(text, rs.getInt("id"));
 
         st.close();
         rs.close();
