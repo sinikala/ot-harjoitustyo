@@ -26,20 +26,20 @@ public class User {
         isSolved[wordIndex] = true;
         solved++;
     }
-    
-    public void setPreviouslySolvedWord(int index){
-        isSolved[index]=true;
+
+    public void setPreviouslySolvedWord(int index) {
+        isSolved[index] = true;
     }
 
     public int getNumberOfSolvedWords() {
         return solved;
     }
-    
-    public int getWordIndex(){
+
+    public int getWordIndex() {
         return wordIndex;
     }
-    
-    public void setAmountOfSolved(int solvedBefore){
+
+    public void setAmountOfSolved(int solvedBefore) {
         solved = solvedBefore;
     }
 
