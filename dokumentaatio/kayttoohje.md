@@ -20,6 +20,7 @@ Peli alkaa, kun käyttäjä on syöttänyt kelvollisen käyttäjänimen ja paina
 Pelaaja saa näytölle anagrammin, joka hänen tulee ratkaista. Hän voi syöttää arvauksensa tekstikenttään ja tarkastaa sen painamalla _Enter_ tai _Tarkista_-nappia. Mikäli vastaus on oikein, pelaaja saa siitä tiedon sekä näkee siihen asti ratkaisemiensa anagrammien kokonaismäärän. Peli näyttää hänelle automaattisesti uuden ratkaistavan anagrammin, mikäli niitä on vielä jäljellä. Mikäli vastaus on väärin, pelaaja saa yrittää arvata sitä loputtoman monta kertaa uudelleen. Mikä hän haluaisi kokeilla mielummin jotain toista anagrammia, painamalla *Uusi sana* -nappia, arpoo peli hänelle uuden sanan ratakaistavaksi. 
 
 ## Etenemisen seuranta
+Pelaaja voi kesken pelin painaa *Missä mennään?* -näppäintä, jolla hän pääsee tilanteen seuranta -näkymään, jossa hänelle kerrotaan montako prosenttia kaikista anagrammeista hän on jo ratkaissut.
 
 ## Pelin päättyminen
 Kun pelaaja on ratkaissut kaikki tarjolla olevat anagrammit, siirtyy hän loppunäkymään, jossa häntä onnitellaan saavutuksesta. Peli on kyseisen pelaajan osalta päättynyt.
