@@ -30,6 +30,8 @@ Anagrammipeli.dao-paketin luokka UserDao huolehtii tietojen tallentamisesta tiet
 ### Tallenettavat tiedot
 Sovellus tallentaa tietoja sovelluksen mukana tulevaan *playerDatabase*-tietokantaan. Tietokanta koostuu kahdesta tietokantataulusta: *Player* ja *SolvedWords*.
 
+![Relaatiokaavio](http://yuml.me/a6146445.jpg)
+
 Tauluun *Player* tallennetaan pelaajan (ts. käyttäjän) nimi ja hänelle luodaan automaattisesti id-numero. *SolvedWords* listaa mitkä anagrammit pelaaja on jo ratkaissut.
 
 
