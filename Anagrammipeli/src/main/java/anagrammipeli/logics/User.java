@@ -8,12 +8,12 @@ import java.util.Random;
  */
 public class User {
 
+    private GameLibrary library;
     private String name;
+    private int playerId;
     private boolean[] isSolved;
     private int solved;
-    private GameLibrary library;
-    private int wordIndex;
-    private int playerId;
+    private int currentWordIndex;
 
     /**
      *
@@ -22,11 +22,11 @@ public class User {
      */
     public User(String name, int playerId) {
         this.library = new GameLibrary();
+        this.playerId = playerId;
         this.name = name;
         this.solved = 0;
         this.isSolved = new boolean[library.getWordListSize()];
-        this.wordIndex = 0;
-        this.playerId = playerId;
+        this.currentWordIndex = 0;
 
     }
 
@@ -35,7 +35,7 @@ public class User {
      * Kerryttää ratkaisujen lukumäärää yhdellä
      */
     public void setSolved() {
-        isSolved[wordIndex] = true;
+        isSolved[currentWordIndex] = true;
         solved++;
     }
 
@@ -56,7 +56,7 @@ public class User {
      * @return Nykyisen arvattavana olevan anagrammin indeksi
      */
     public int getWordIndex() {
-        return wordIndex;
+        return currentWordIndex;
     }
 
     /**
@@ -98,7 +98,7 @@ public class User {
      * @return true, jos arvaus on oikein, muuten false
      */
     public boolean check(String guess) {
-        return library.isCorrect(wordIndex, guess);
+        return library.isCorrect(currentWordIndex, guess);
     }
 
     /**
@@ -114,12 +114,12 @@ public class User {
         Random random = new Random();
 
         while (true) {
-            wordIndex = random.nextInt(isSolved.length);
-            if (isSolved[wordIndex] == false) {
+            currentWordIndex = random.nextInt(isSolved.length);
+            if (isSolved[currentWordIndex] == false) {
                 break;
             }
         }
-        String word = library.getScrambledWord(wordIndex);
+        String word = library.getScrambledWord(currentWordIndex);
         return word;
     }
 
@@ -129,6 +129,7 @@ public class User {
 
     /**
      * tarkastetaan onko ratkaissut jo annetussa indeksissä olevan anagrammin
+     *
      * @param idx kysytty indeksi
      * @return true, jos on ratkaistu, muuten false
      */

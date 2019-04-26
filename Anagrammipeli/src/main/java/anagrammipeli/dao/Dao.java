@@ -8,7 +8,7 @@ public interface Dao {
 
     User create(String text) throws Exception;
 
-    User getOldUser(String username) throws Exception;
+    User getOldUser() throws Exception;
 
     void addSolvedWord(User user) throws Exception;
 

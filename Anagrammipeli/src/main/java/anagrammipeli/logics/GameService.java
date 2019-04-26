@@ -33,12 +33,12 @@ public class GameService {
      * @see anagrammipeli.dao.UserDao#setOldPlayerSolvedList(User)
      * @see anagrammipeli.dao.UserDao#create(String)
      */
-    public void setUser(String text) throws Exception {
-        if (userDao.checkIfOldUser(text)) {
-            user = userDao.getOldUser(text);
+    public void setUser(String name) throws Exception {
+        if (userDao.checkIfOldUser(name)) {
+            user = userDao.getOldUser();
             userDao.setOldPlayerSolvedList(user);
         } else {
-            user = userDao.create(text);
+            user = userDao.create(name);
         }
     }
     

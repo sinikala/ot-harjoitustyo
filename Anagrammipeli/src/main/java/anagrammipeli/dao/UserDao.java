@@ -75,7 +75,7 @@ public class UserDao implements Dao {
     }
 
     @Override
-    public User getOldUser(String username) throws Exception {
+    public User getOldUser() throws Exception {
         // aseta vanhan pelaajan tiedot user-olioon
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("SELECT * FROM Player WHERE id = ?");

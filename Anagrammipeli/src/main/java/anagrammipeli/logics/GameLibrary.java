@@ -22,7 +22,7 @@ public class GameLibrary {
     }
 
     /**
-     *HAetaan anagrammi-listasta
+     *Haetaan anagrammi-listasta
      * @param idx   halutun angrammin indeksi
      * @return  haluttu anagrammi
      */
