@@ -14,6 +14,7 @@ Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksel
 
 ## Releaset
 [Viikko 5](https://github.com/sinikala/ot-harjoitustyo/releases)
+[Viikko 6](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v0.2beta)
 
 
 ## Komentorivikomennot
