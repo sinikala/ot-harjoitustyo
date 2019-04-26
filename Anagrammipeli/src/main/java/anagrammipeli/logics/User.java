@@ -27,7 +27,7 @@ public class User {
         solved++;
     }
     
-    public void setPreviouslySolvedWords(int index){
+    public void setPreviouslySolvedWord(int index){
         isSolved[index]=true;
     }
 
@@ -39,8 +39,8 @@ public class User {
         return wordIndex;
     }
     
-    public void setSolved(int solvedBefore){
-        solved += solvedBefore;
+    public void setAmountOfSolved(int solvedBefore){
+        solved = solvedBefore;
     }
 
     public boolean checkIfSolved(int idx) {

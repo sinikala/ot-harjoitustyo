@@ -27,6 +27,7 @@ public class Main extends Application {
     public void start(Stage window) throws Exception {
         GameService service = new GameService();
         User user = null;
+
         BorderPane welcomeLayout = new BorderPane();
         VBox box = new VBox();
         box.setPadding(new Insets(50, 100, 50, 100));
@@ -45,21 +46,23 @@ public class Main extends Application {
         VBox gameBox = new VBox();
         gameBox.setPadding(new Insets(40, 80, 40, 80));
         gameBox.setSpacing(10);
+
         Label gameInstructions = new Label("Tässä anagrammisi:");
         Label anagramm = new Label(" ");
         TextField userGuess = new TextField();
         HBox options = new HBox();
         options.setSpacing(10);
         Button checkButton = new Button("Tarkista");
-        Button newWord = new Button("Uusi sana");
-        Button scores = new Button("Missä mennään?");
-        options.getChildren().addAll(checkButton, newWord);
+        Button newWordButton = new Button("Uusi sana");
+        Button scoresButton = new Button("Missä mennään?");
+
+        options.getChildren().addAll(checkButton, newWordButton);
         Label feedback = new Label(" ");
         feedback.setMinSize(200, 50);
 
         gameBox.getChildren().addAll(gameInstructions, anagramm, userGuess, options, feedback);
         gameLayout.setTop(gameBox);
-        gameLayout.setBottom(scores);
+        gameLayout.setBottom(scoresButton);
 
         BorderPane doneLayout = new BorderPane();
         VBox doneBox = new VBox();
@@ -73,6 +76,7 @@ public class Main extends Application {
         VBox scoreBox = new VBox();
         scoreBox.setPadding(new Insets(40, 80, 40, 80));
         scoreBox.setSpacing(10);
+
         Label scoreNow = new Label("Olet ratkaissut 0.0 % sanoista!");
         Button backToGame = new Button("Takaisin");
         scoreBox.getChildren().addAll(scoreNow, backToGame);
@@ -96,9 +100,13 @@ public class Main extends Application {
         });
 
         play.setOnAction((event) -> {
-            window.setScene(gameScene);
-            currentWord = service.getWord();
-            anagramm.setText(currentWord);
+            if (service.allDone()) {
+                window.setScene(allDone);
+            } else {
+                window.setScene(gameScene);
+                currentWord = service.getWord();
+                anagramm.setText(currentWord);
+            }
         });
 
 //        //Miten poistaa toisteisuus??
@@ -110,8 +118,10 @@ public class Main extends Application {
                         feedback.setText("Oikein! " + service.getScore());
                         if (service.allDone()) {
                             window.setScene(allDone);
+                        } else {
+                            currentWord = service.getWord();
+                            anagramm.setText(currentWord);
                         }
-                        service.getWord();
                     } else {
                         feedback.setText("Yritä uudelleen.");
 
@@ -130,8 +140,10 @@ public class Main extends Application {
                     feedback.setText("Oikein! " + service.getScore());
                     if (service.allDone()) {
                         window.setScene(allDone);
+                    } else {
+                        currentWord = service.getWord();
+                        anagramm.setText(currentWord);
                     }
-                    service.getWord();
                 } else {
                     feedback.setText("Yritä uudelleen.");
 
@@ -142,20 +154,22 @@ public class Main extends Application {
             }
         });
 
-//        newWord.setOnAction((event) -> {
-//            anagramm.setText(user.pickWordToSolve());
-//            userGuess.clear();
-//        });
-//
-//        scores.setOnAction((event) -> {
-//            setPercentage(scoreNow);
-//            window.setScene(scoreScene);
-//        });
-//
-//        backToGame.setOnAction((event) -> {
-//            window.setScene(gameScene);
-//            feedback.setText(" ");
-//        });
+        newWordButton.setOnAction((event) -> {
+            anagramm.setText(service.getWord());
+            userGuess.clear();
+        });
+
+        scoresButton.setOnAction((event) -> {
+            scoreNow.setText(service.getPercentage());
+
+            window.setScene(scoreScene);
+        });
+
+        backToGame.setOnAction((event) -> {
+            window.setScene(gameScene);
+            feedback.setText(" ");
+        });
+
         window.setScene(welcomeScene);
         window.setTitle("ANAGRAMMIPELI");
         window.show();
@@ -164,9 +178,4 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception {
         launch(Main.class);
     }
-
-//    private void setPercentage(Label scoreNow) {
-//        double percentage = user.getPercentage();
-//        scoreNow.setText("Olet ratkaissut " + percentage + " % sanoista!");
-//    }
 }

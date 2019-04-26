@@ -34,8 +34,9 @@ public class GameService {
     }
 
     public boolean allDone() {
-        // on ko kaikki ratkaistu
-
+       if(user.pickWordToSolve().equals("X") ){
+           return true;
+       }
         return false;
     }
 
@@ -46,6 +47,12 @@ public class GameService {
 
     public String getScore() {
         return user.getScore();
+    }
+
+    public String getPercentage() {
+        double percentage = user.getPercentage();
+        
+        return "Olet ratkaissut " + percentage + " % sanoista!";
     }
 
 }

@@ -7,40 +7,37 @@ import anagrammipeli.logics.GameLibrary;
 
 public class UserDao implements Dao {
 
- 
     private int playerId;
 
     public UserDao() throws Exception {
     }
-    
+
     public void setOldPlayerSolvedList(User user) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("SELECT * FROM solvedWords WHERE player_id = ?");
         st.setInt(1, playerId);
 
         ResultSet rs = st.executeQuery();
-        
+
         int wordCounter = 0;
-        while(rs.next()){
-            user.setPreviouslySolvedWords(rs.getInt("word_index"));
+        while (rs.next()) {
+            user.setPreviouslySolvedWord(rs.getInt("word_index"));
             wordCounter++;
         }
-        
+
         st.close();
         rs.close();
         connection.close();
-        user.setPreviouslySolvedWords(wordCounter);
+        user.setAmountOfSolved(wordCounter);
     }
 
-    
-    
     @Override
     public void addSolvedWord(User user) throws Exception {
         int solvedWordIndex = user.getWordIndex();
-        
+
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("INSERT INTO solvedWords (player_id, word_index) VALUES (?, ?)");
-        
+
         st.setInt(1, playerId);
         st.setInt(2, solvedWordIndex);
         st.executeUpdate();
@@ -58,10 +55,8 @@ public class UserDao implements Dao {
         //tarkista löytyykö tietokannasta
 
         // !!! Useamman samannimisen estäminen!!! 
-        
-        
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
-        PreparedStatement statement = connection.prepareStatement("SELECT id FROM Player WHERE name = ?");
+        PreparedStatement statement = connection.prepareStatement("SELECT * FROM Player WHERE name = ?");
         statement.setString(1, text);
 
         ResultSet rs = statement.executeQuery();
@@ -87,9 +82,8 @@ public class UserDao implements Dao {
         st.setInt(1, playerId);
 
         ResultSet rs = st.executeQuery();
-        rs.next();
 
-       User user = new User(rs.getString("name"), rs.getInt("id"));
+        User user = new User(rs.getString("name"), rs.getInt("id"));
 
         st.close();
         rs.close();
@@ -103,7 +97,7 @@ public class UserDao implements Dao {
         //luo tietokantaan uusi käyttäjä
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("INSERT INTO Player (name) VALUES (?)");
-        
+
         st.setString(1, text);
         st.executeUpdate();
         st.close();
@@ -112,9 +106,9 @@ public class UserDao implements Dao {
         st.setString(1, text);
 
         ResultSet rs = st.executeQuery();
-        rs.next();
 
-         User user = new User(text, rs.getInt("id"));
+        User user = new User(text, rs.getInt("id"));
+        playerId = rs.getInt("id");
 
         st.close();
         rs.close();
