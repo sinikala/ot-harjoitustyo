@@ -9,4 +9,8 @@ Päivä | Aika | Mitä tein
 14.4.| 5 | Lisää toiminnallisuutta ja testejä, jar-paketti, 1. release
 16.4.| 1 | Sekvenssikaavio, readme:n täydennys
 21.4. | 1 | Tietokannan alustus, sql-ajurin ja UserDao-luokan lisäys
-**yht.**|  **18** | **tuntia**
+25.4. | 2 | Tietokantakyselyjen kirjoittaminen, tiedon tallentamisen käyttöönotto
+26.4. | 6 | Tietokantakyselyiden jatkotyöstö, yleinen hiominen, JavaDoc, arkkitehtuurikuvauksen täydennys, käyttöohjeen aloitus
+**yht.**|  **26** | **tuntia**
+
+(Työajassa ei ole huomioitu päivityksiä seuranneen JavaFX-kaaoksen korjaamiseen käytettyä muutamaa tuntia.)
