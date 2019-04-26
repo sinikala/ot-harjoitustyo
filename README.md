@@ -3,12 +3,14 @@
 Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksella pelaaja pääse ratkomaan [anagrammeja](https://fi.wikipedia.org/wiki/Anagrammi). Useampi pelaaja voi pelata peliä omalla käyttäjänimellään ja seurata edistymistään matkallaan anagrammien mestaruuteen.
 
 ## Dokumentaatio
+[Arkkitehtuurikuvaus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
+
+[Käyttöohje](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kayttoohje.md)
 
 [Määrittelydokumentti](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/m%C3%A4%C3%A4rittelydokumentti.md)
 
 [Työaikakirjanpito](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
 
-[Arkkitehtuurikuvaus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/arkkitehtuuri.md)
 
 ## Releaset
 [Viikko 5](https://github.com/sinikala/ot-harjoitustyo/releases)
