@@ -3,6 +3,8 @@
 ## Rakenne
 
 Sovelluksen arkkitehtuuri on kolmikerroksinen ja koodin pakkausrakenne on seuraava:
+![Pakkausrakenne](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/Pakettirakenne.png)
+
 **Pakkausten vastuualueet:**
 * Anagrammipeli.ui - Käyttöliittymä (JavaFx)
 * Anagrammipeli.logics - Sovelluslogiikka
