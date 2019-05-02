@@ -14,10 +14,10 @@ import javafx.stage.Stage;
 
 public class Main extends Application {
 
-    User user;
-    double percentage;
     GameService service;
     String currentWord;
+    Pane picture;
+    ImageView pic;
 
 //    @Override
 //    public void init() throws Exception {
@@ -26,21 +26,51 @@ public class Main extends Application {
     @Override
     public void start(Stage window) throws Exception {
         GameService service = new GameService();
-        User user = null;
 
-        BorderPane welcomeLayout = new BorderPane();
-        VBox box = new VBox();
-        box.setPadding(new Insets(50, 100, 50, 100));
-        box.setSpacing(10);
+        // start layout base
+        BorderPane startLayout = new BorderPane();
+        startLayout.setPadding(new Insets(10));
+        startLayout.setMinSize(400, 250);
 
-        Label instructions = new Label("Kirjoita nimesi ja paina OK.");
-        TextField nameField = new TextField();
-        Button nameOk = new Button("OK");
+        // 'old or new' components
+        VBox oldOrNewBox = new VBox();
+        oldOrNewBox.setPadding(new Insets(10));
+        HBox oldOrNewButtonBox = new HBox();
+        oldOrNewButtonBox.setPadding(new Insets(20));
+        oldOrNewButtonBox.setSpacing(10);
+        Label oldOrNewWelcome = new Label("Tervetuloa!");
+        Button newGameButton = new Button("Uusi peli");
+        Button oldGameButton = new Button("Jatka aiempaa peliä");
+
+        oldOrNewButtonBox.getChildren().addAll(oldGameButton, newGameButton);
+        oldOrNewBox.getChildren().addAll(oldOrNewWelcome, oldOrNewButtonBox);
+        startLayout.setCenter(oldOrNewBox);
+
+        // old player components
+        VBox oldPlayerBox = new VBox();
+        oldPlayerBox.setPadding(new Insets(20));
+        oldPlayerBox.setSpacing(10);
+
+        Label oldInstructions = new Label("Kirjoita nimimerkki, jolla pelasit\nviimeksi ja paina OK.");
+        TextField oldNameField = new TextField();
+        Button oldNameOk = new Button("OK");
         Button play = new Button("Pelaamaan!");
 
-        box.getChildren().addAll(instructions, nameField, nameOk);
-        welcomeLayout.setTop(box);
+        oldPlayerBox.getChildren().addAll(oldInstructions, oldNameField, oldNameOk);
 
+        //new player components
+        VBox newPlayerBox = new VBox();
+        newPlayerBox.setPadding(new Insets(20));
+        newPlayerBox.setSpacing(10);
+
+        Label newPlayerInstructions = new Label("Syötä haluamasi nimimerkki ja paina OK.");
+        Label nameAlreadyInUse = new Label(" ");
+        TextField newUsername = new TextField();
+        Button newUserOk = new Button("OK");
+
+        newPlayerBox.getChildren().addAll(newPlayerInstructions, newUsername, newUserOk, nameAlreadyInUse);
+
+        // game scene components
         BorderPane gameLayout = new BorderPane();
         gameLayout.setPadding(new Insets(10));
         VBox gameBox = new VBox();
@@ -64,13 +94,16 @@ public class Main extends Application {
         gameLayout.setTop(gameBox);
         gameLayout.setBottom(scoresButton);
 
-        BorderPane doneLayout = new BorderPane();
-        VBox doneBox = new VBox();
-        doneBox.setPadding(new Insets(40, 80, 40, 80));
-        Label congrats = new Label("Olet ratkaissut kaikki anagrammit! Hyvää työtä!");
-        doneBox.getChildren().addAll(congrats);
-        doneLayout.setTop(doneBox);
+        //picture element
+        picture = new Pane();
+        Image prints = new Image("file:prints.png");
+        pic = new ImageView(prints);
+        pic.setFitHeight(200);
+        pic.setFitWidth(200);
+        picture.getChildren().add(pic);
+        //setPicture();
 
+        //score components
         BorderPane scoreLayout = new BorderPane();
         scoreLayout.setPadding(new Insets(10));
         VBox scoreBox = new VBox();
@@ -79,21 +112,43 @@ public class Main extends Application {
 
         Label scoreNow = new Label("Olet ratkaissut 0.0 % sanoista!");
         Button backToGame = new Button("Takaisin");
-        scoreBox.getChildren().addAll(scoreNow, backToGame);
+        scoreBox.getChildren().addAll(scoreNow, picture, backToGame);
         scoreLayout.setTop(scoreBox);
 
+        //all done scene
+        BorderPane doneLayout = new BorderPane();
+        VBox doneBox = new VBox();
+        doneBox.setPadding(new Insets(40, 80, 40, 80));
+        Pane monstersPane = new Pane();
+        Image monster = new Image("file:monster.png");
+        ImageView monsterPic = new ImageView(monster);
+        pic.setFitHeight(200);
+        pic.setFitWidth(200);
+        monstersPane.getChildren().add(monsterPic);
+        Label congrats = new Label("Olet ratkaissut kaikki anagrammit! Hyvää työtä!");
+        doneBox.getChildren().addAll(congrats, monstersPane);
+        doneLayout.setTop(doneBox);
+
         Scene gameScene = new Scene(gameLayout);
-        Scene welcomeScene = new Scene(welcomeLayout);
+        Scene welcomeScene = new Scene(startLayout);
         Scene allDone = new Scene(doneLayout);
         Scene scoreScene = new Scene(scoreLayout);
 
-        nameOk.setOnAction((event) -> {
+        oldGameButton.setOnAction((event) -> {
+            startLayout.setCenter(oldPlayerBox);
+        });
+
+        newGameButton.setOnAction((event) -> {
+            startLayout.setCenter(newPlayerBox);
+        });
+
+        oldNameOk.setOnAction((event) -> {
             try {
-                String text = nameField.getText();
-                service.setUser(text);
-                instructions.setText("Tervetuloa " + nameField.getText() + "!");
-                box.getChildren().removeAll(nameField, nameOk);
-                box.getChildren().add(play);
+                String text = oldNameField.getText();
+                service.getOldUser(text);
+                oldInstructions.setText("Tervetuloa takaisin " + oldNameField.getText() + "!");
+                oldPlayerBox.getChildren().removeAll(oldNameField, oldNameOk);
+                oldPlayerBox.getChildren().add(play);
             } catch (Exception e) {
             }
 
@@ -109,7 +164,24 @@ public class Main extends Application {
             }
         });
 
-//        //Miten poistaa toisteisuus??
+        newUserOk.setOnAction((event) -> {
+            try {
+                String text = newUsername.getText();
+                if (service.checkIfNameInUse(text)) {
+                    nameAlreadyInUse.setText("Nimi on jo käytössä, kokeile jotain toista.");
+                    newUsername.clear();
+                } else {
+                    service.createNewUser(text);
+                    newPlayerBox.getChildren().removeAll(nameAlreadyInUse, newUsername, newUserOk);
+                    newPlayerInstructions.setText("Tervetuloa pelaamaan " + text + "!");
+                    newPlayerBox.getChildren().add(play);
+                }
+
+            } catch (Exception e) {
+
+            }
+        });
+
         userGuess.setOnKeyPressed((event) -> {
             if (event.getCode() == KeyCode.ENTER) {
                 try {
@@ -124,7 +196,6 @@ public class Main extends Application {
                         }
                     } else {
                         feedback.setText("Yritä uudelleen.");
-
                     }
                     userGuess.clear();
                     userGuess.requestFocus();
@@ -146,7 +217,6 @@ public class Main extends Application {
                     }
                 } else {
                     feedback.setText("Yritä uudelleen.");
-
                 }
                 userGuess.clear();
                 userGuess.requestFocus();
@@ -161,8 +231,26 @@ public class Main extends Application {
 
         scoresButton.setOnAction((event) -> {
             scoreNow.setText(service.getPercentage());
+            Double percent = service.getPercentageforPicture();
+
+            if (percent >= 33 && percent < 66) {
+                picture.getChildren().remove(pic);
+                Image egg = new Image("file:egg.jpeg");
+                pic = new ImageView(egg);
+                pic.setFitHeight(250);
+                pic.setFitWidth(200);
+                picture.getChildren().add(pic);
+            } else if (percent >= 66 && percent < 100) {
+                picture.getChildren().remove(pic);
+                Image hatched = new Image("file:hatched.jpg");
+                pic = new ImageView(hatched);
+                pic.setFitHeight(200);
+                pic.setFitWidth(250);
+                picture.getChildren().add(pic);
+            }
 
             window.setScene(scoreScene);
+
         });
 
         backToGame.setOnAction((event) -> {
@@ -178,4 +266,13 @@ public class Main extends Application {
     public static void main(String[] args) throws Exception {
         launch(Main.class);
     }
+
 }
+/*
+picture.getChildren().remove(pic);
+                Image monster = new Image("file:monster.png");
+                pic = new ImageView(prints);
+                pic.setFitHeight(200);
+        pic.setFitWidth(200);
+                picture.getChildren().add(pic);
+ */

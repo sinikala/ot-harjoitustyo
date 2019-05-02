@@ -62,7 +62,6 @@ public class UserDao implements Dao {
         ResultSet rs = statement.executeQuery();
 
         if (rs.next()) {
-            playerId = rs.getInt("id");
             statement.close();
             rs.close();
             connection.close();
@@ -75,15 +74,16 @@ public class UserDao implements Dao {
     }
 
     @Override
-    public User getOldUser() throws Exception {
+    public User getOldUser(String name) throws Exception {
         // aseta vanhan pelaajan tiedot user-olioon
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
-        PreparedStatement st = connection.prepareStatement("SELECT * FROM Player WHERE id = ?");
-        st.setInt(1, playerId);
+        PreparedStatement st = connection.prepareStatement("SELECT * FROM Player WHERE name = ?");
+        st.setString(1, name);
 
         ResultSet rs = st.executeQuery();
 
         User user = new User(rs.getString("name"), rs.getInt("id"));
+        playerId = rs.getInt("id");
 
         st.close();
         rs.close();

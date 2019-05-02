@@ -11,6 +11,7 @@ Päivä | Aika | Mitä tein
 21.4. | 1 | Tietokannan alustus, sql-ajurin ja UserDao-luokan lisäys
 25.4. | 2 | Tietokantakyselyjen kirjoittaminen, tiedon tallentamisen käyttöönotto
 26.4. | 6 | Tietokantakyselyiden jatkotyöstö, yleinen hiominen, JavaDoc, arkkitehtuurikuvauksen täydennys, käyttöohjeen aloitus
-**yht.**|  **26** | **tuntia**
+2.5. | 4 | Vanha/uusi käyttäjä -toiminnallisuus lisätty, edistymiskuvat otettu käyttöön
+**yht.**|  **30** | **tuntia**
 
 (Työajassa ei ole huomioitu päivityksiä seuranneen JavaFX-kaaoksen korjaamiseen käytettyä muutamaa tuntia.)
