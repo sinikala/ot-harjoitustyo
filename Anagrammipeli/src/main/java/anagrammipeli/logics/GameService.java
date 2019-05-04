@@ -25,23 +25,19 @@ public class GameService {
     }
 
     /**
-     * Tarkistaa kutsumalla userDaon metodeja, onko pelin käynnistäjä vanha vai
-     * uusi käyttäjä ja tuloksen mukaan joko kutsuu uuden käyttäjän luovaa tai
-     * vanhan käyttäjän tiedot hakevia metodeja.
-     *
-     * @param text
-     * @throws Exception
-     * @see anagrammipeli.dao.UserDao#checkIfOldUser(String)
-     * @see anagrammipeli.dao.UserDao#getOldUser(String)
-     * @see anagrammipeli.dao.UserDao#setOldPlayerSolvedList(User)
-     * @see anagrammipeli.dao.UserDao#create(String)
+     * Tarkistaa löytyykö annettu käyttäjnimi jo tietokannasta. Jos löytyy, kutsuu metodeja, 
+     * jotka hakevat pelaajan tiedot tietokannasta ja asettavat ne käyttäjää kuvastavaan User-luokan olion muuttujiin 
+     * @param name  Käyttäjän antama käyttäjänimi
+     * @return true, jos annettu nimi löytyy tietokannasta, muutoin false
+     * @throws Exception 
      */
-    public void getOldUser(String name) throws Exception {
+    public boolean getOldUser(String name) throws Exception {
         if (userDao.checkIfOldUser(name)) {
             user = userDao.getOldUser(name);
             userDao.setOldPlayerSolvedList(user);
+            return true;
         } else {
-            return;
+            return false;
         }
     }
 

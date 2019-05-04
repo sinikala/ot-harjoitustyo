@@ -9,9 +9,26 @@ public class UserDao implements Dao {
 
     private int playerId;
 
+    /**
+     * Alustetaan UserDao-olio ja tarkistetaan löytyykö pelin toimintaan
+     * tarvittava tietokanta, jos ei, kutsutaan metodia, joka luo sen.
+     *
+     * @throws Exception
+     */
     public UserDao() throws Exception {
+        if (checkDatabaseConnection() == false) {
+            initializeDatabase();
+        }
     }
 
+    /**
+     * Haetaan vanhan, peliä jatkavan käyttäjän tilastot tietokannasta, eli
+     * mitkä sanat on jo ratkaistu ja tallenetaan tiedot pelaajaa edustavaan
+     * User-luokan olioon muuttujiin.
+     *
+     * @param user nyt pelaava käyttäjä
+     * @throws Exception
+     */
     public void setOldPlayerSolvedList(User user) throws Exception {
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement st = connection.prepareStatement("SELECT * FROM solvedWords WHERE player_id = ?");
@@ -31,6 +48,13 @@ public class UserDao implements Dao {
         user.setAmountOfSolved(wordCounter);
     }
 
+    /**
+     * Tallennetaan tietokantaan pelaajan ratkaiseman anagrammin indeksi ja
+     * päivitetään ratkaistuksi User-olion sanalistaan.
+     *
+     * @param user nyt pelaava käyttäjä
+     * @throws Exception
+     */
     @Override
     public void addSolvedWord(User user) throws Exception {
         int solvedWordIndex = user.getWordIndex();
@@ -46,15 +70,15 @@ public class UserDao implements Dao {
         user.setSolved();
     }
 
+    /**
+     * Tarkistetaan löytyykö annattu käyttäjänimi jo tietokannasta
+     *
+     * @param text käyttäjän syöttämä nimi
+     * @return true, jos annetulla nimellä löytyy käyttäjä tietokannasta, muuten false
+     * @throws Exception
+     */
     @Override
-    public int countSolvedWords() throws Exception {
-        return -1;
-    }
-
     public boolean checkIfOldUser(String text) throws Exception {
-        //tarkista löytyykö tietokannasta
-
-        // !!! Useamman samannimisen estäminen!!! 
         Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
         PreparedStatement statement = connection.prepareStatement("SELECT * FROM Player WHERE name = ?");
         statement.setString(1, text);
@@ -73,6 +97,14 @@ public class UserDao implements Dao {
         return false;
     }
 
+    /**
+     * Haetaan vanhan käyttäjän tiedot tietokannasta ja asetetaan ne häntä
+     * edustavan User-olion muuttujiin.
+     *
+     * @param name käyttäjänimi jonka tiedot haetaan
+     * @return User-olio
+     * @throws Exception
+     */
     @Override
     public User getOldUser(String name) throws Exception {
         // aseta vanhan pelaajan tiedot user-olioon
@@ -92,6 +124,14 @@ public class UserDao implements Dao {
         return user;
     }
 
+    /**
+     * Lisätään tietokantaan uuden pelaajan tiedot ja luodaan häntä edustava
+     * User-luokan olio.
+     *
+     * @param text pelajaan syöttämä käyttäjänimi
+     * @return User-olio
+     * @throws Exception
+     */
     @Override
     public User create(String text) throws Exception {
         //luo tietokantaan uusi käyttäjä
@@ -115,6 +155,47 @@ public class UserDao implements Dao {
         connection.close();
 
         return user;
+    }
+
+    /**
+     * Tarkistetaan, onko tietokanta playerDatabase olemassa ja toimiiko yhteys.
+     *
+     * @return true, jos tietokanta löytyy, muutoin false
+     * @throws Exception
+     */
+    private boolean checkDatabaseConnection() throws Exception {
+        boolean connectionWorks = false;
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
+
+        ResultSet resultSet = connection.getMetaData().getCatalogs();
+        if (resultSet.next()) {
+            connectionWorks = true;
+        }
+
+        resultSet.close();
+        connection.close();
+
+        return connectionWorks;
+
+    }
+
+    /**
+     * Alustetaan pelin toiminnan edellyttämä tietokanta ja tietokantataulut
+     */
+    private void initializeDatabase() {
+        try (Connection conn = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db", "sa", "")) {
+
+            PreparedStatement statement = conn.prepareStatement("CREATE TABLE Player(id integer primary key autoincrement, name varchar(45))");
+            statement.executeUpdate();
+            statement.close();
+
+            statement = conn.prepareStatement("CREATE TABLE solvedWords(player_id integer, word_index integer, foreign key (player_id) references Player(id))");
+            statement.executeUpdate();
+            statement.close();
+
+            conn.close();
+        } catch (SQLException ex) {
+        }
     }
 
 }

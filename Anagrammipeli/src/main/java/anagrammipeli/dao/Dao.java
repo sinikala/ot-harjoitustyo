@@ -12,6 +12,5 @@ public interface Dao {
 
     void addSolvedWord(User user) throws Exception;
 
-    int countSolvedWords() throws Exception;
-
+    boolean checkIfOldUser(String text) throws Exception;
 }

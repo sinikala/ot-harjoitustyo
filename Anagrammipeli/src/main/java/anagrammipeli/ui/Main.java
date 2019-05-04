@@ -55,20 +55,22 @@ public class Main extends Application {
         TextField oldNameField = new TextField();
         Button oldNameOk = new Button("OK");
         Button play = new Button("Pelaamaan!");
+        Button backFromOld = new Button("Takaisin");
 
-        oldPlayerBox.getChildren().addAll(oldInstructions, oldNameField, oldNameOk);
+        oldPlayerBox.getChildren().addAll(oldInstructions, oldNameField, oldNameOk, backFromOld);
 
         //new player components
         VBox newPlayerBox = new VBox();
         newPlayerBox.setPadding(new Insets(20));
         newPlayerBox.setSpacing(10);
 
-        Label newPlayerInstructions = new Label("Syötä haluamasi nimimerkki ja paina OK.");
+        Label newPlayerInstructions = new Label("Syötä haluamasi nimimerkki ja paina OK. ");
         Label nameAlreadyInUse = new Label(" ");
         TextField newUsername = new TextField();
         Button newUserOk = new Button("OK");
+        Button backFromNew = new Button("Takaisin");
 
-        newPlayerBox.getChildren().addAll(newPlayerInstructions, newUsername, newUserOk, nameAlreadyInUse);
+        newPlayerBox.getChildren().addAll(newPlayerInstructions, newUsername, newUserOk, backFromNew, nameAlreadyInUse);
 
         // game scene components
         BorderPane gameLayout = new BorderPane();
@@ -145,10 +147,15 @@ public class Main extends Application {
         oldNameOk.setOnAction((event) -> {
             try {
                 String text = oldNameField.getText();
-                service.getOldUser(text);
-                oldInstructions.setText("Tervetuloa takaisin " + oldNameField.getText() + "!");
-                oldPlayerBox.getChildren().removeAll(oldNameField, oldNameOk);
-                oldPlayerBox.getChildren().add(play);
+                if (service.getOldUser(text)) {
+                    oldInstructions.setText("Tervetuloa takaisin " + oldNameField.getText() + "!");
+                    oldPlayerBox.getChildren().removeAll(oldNameField, oldNameOk, backFromOld);
+                    oldPlayerBox.getChildren().add(play);
+                } else {
+                    oldInstructions.setText("Kirjoititko nimen varmasti oikein?\n  ");
+                    oldNameField.clear();
+                    oldNameField.requestFocus();
+                }
             } catch (Exception e) {
             }
 
@@ -172,7 +179,7 @@ public class Main extends Application {
                     newUsername.clear();
                 } else {
                     service.createNewUser(text);
-                    newPlayerBox.getChildren().removeAll(nameAlreadyInUse, newUsername, newUserOk);
+                    newPlayerBox.getChildren().removeAll(nameAlreadyInUse, newUsername, newUserOk, backFromNew);
                     newPlayerInstructions.setText("Tervetuloa pelaamaan " + text + "!");
                     newPlayerBox.getChildren().add(play);
                 }
@@ -180,6 +187,14 @@ public class Main extends Application {
             } catch (Exception e) {
 
             }
+        });
+        
+        backFromOld.setOnAction((event)-> {
+            startLayout.setCenter(oldOrNewBox);
+        });
+        
+         backFromNew.setOnAction((event)-> {
+            startLayout.setCenter(oldOrNewBox);
         });
 
         userGuess.setOnKeyPressed((event) -> {
