@@ -20,7 +20,7 @@ Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksel
 [Viikko 6](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v0.2beta)
 
 
-[Loppupalautus](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.1)
+[Loppupalautus](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.2)
 
 ## Komentorivikomennot
 
