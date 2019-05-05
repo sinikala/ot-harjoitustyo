@@ -20,10 +20,10 @@ Erillisiä käyttäjärooleja ei ole.
 ### Näkymät
 * Aloitusnäkymä: Pelaaja valitsee haluaako jatkaa vanhaa peliä vai aloittaa uuden
 * Uusi peli -näkymä: Pelaaja luo uuden käyttäjänimen, jos nimi on hyväksyttävä pääsee hän ilmestyneellä _Pelaamaan!_-napilla peliin (mahdollisuus päästä myös takaisin aloitusnäkymään)
-* Vanha peli -näkymä: Pelaaja syöttää aiemman käyttäjäimensä ja pääsee ilmestyneellä _Pelaamaan!_-napilla peliin (mahdollisuus päästä myös takaisin aloitusnäkymään)
-* Pelinäkymä: Pelaajalle näytetään ratkaistava anagrammi, pelaaja syöttää arvauksensa ja tarkistaa sen tarkistus-napilla,	vaihtoehtoisesti hän voi pyytää uuden sanan "yritä toista"-napilla. Näkymässä myös "katso tilasto"-nappi, josta 	pelaaja pääse tilastonäkymään.
-* Tilastonäkymä: Pelaaja näkee kuinka suuren osan sanoista hän on ratkaissut havainnekuvan, joka heijastaa etenemistä hänen etenemistään pelissä.
-* Loppunäkymä: Kun pelaaja on ratkaissut kaikki anagrammit hänet siirretään loppunäkymään, jossa onnitellaan pelin läpäisemisestä. 
+* Vanha peli -näkymä: Pelaaja syöttää aiemman käyttäjänimensä ja pääsee ilmestyneellä _Pelaamaan!_-napilla peliin (mahdollisuus päästä myös takaisin aloitusnäkymään)
+* Pelinäkymä: Pelaajalle näytetään ratkaistava anagrammi, pelaaja syöttää arvauksensa ja tarkistaa sen tarkistus-napilla,	vaihtoehtoisesti hän voi pyytää uuden sanan "Uusi sana"-napilla. Näkymässä myös "Missä mennään?"-nappi, josta pelaaja pääse tilastonäkymään.
+* Tilastonäkymä: Pelaaja näkee kuinka suuren osan sanoista hän on ratkaissut ja havainnekuvan, joka heijastaa hänen etenemistään pelissä.
+* Loppunäkymä: Kun pelaaja on ratkaissut kaikki anagrammit, hänet siirretään loppunäkymään, jossa onnitellaan pelin läpäisemisestä. 
 
 
 ## Laajentavat jatkokehitysideat
