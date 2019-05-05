@@ -13,7 +13,7 @@ Päivä | Aika | Mitä tein
 26.4. | 6 | Tietokantakyselyiden jatkotyöstö, yleinen hiominen, JavaDoc, arkkitehtuurikuvauksen täydennys, käyttöohjeen aloitus
 2.5. | 4 | Vanha/uusi käyttäjä -toiminnallisuus lisätty, edistymiskuvat otettu käyttöön
 4.5. | 3 | Tietokannan testaus, tietokannan alustusmetodit, UI:n hienosäätöä, sanaston laajennus
-5.5. |  7 | Viimeiset testit ja dokumentit, hienosäätöä
-**yht.**|  **40** | **tuntia**
+5.5. |  8 | Viimeiset testit ja dokumentit, hienosäätöä, jar + kuva -ongelman korjaus
+**yht.**|  **41** | **tuntia**
 
 (Työajassa ei ole huomioitu päivityksiä seuranneen JavaFX-kaaoksen korjaamiseen käytettyä muutamaa tuntia.)
