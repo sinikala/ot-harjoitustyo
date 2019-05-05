@@ -10,6 +10,7 @@ Sovellus on toteutettu Ohjelmistotekniikka-kurssin harjoitustyönä. Sovelluksel
 [Määrittelydokumentti](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/m%C3%A4%C3%A4rittelydokumentti.md)
 
 [Työaikakirjanpito](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/ty%C3%B6aikakirjanpito.md)
+
 [Testausdokumentti](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/testausdokumentti.md)
 
 
