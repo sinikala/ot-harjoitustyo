@@ -149,7 +149,6 @@ public class Main extends Application {
                     oldPlayerBox.getChildren().add(play);
                 } else {
                     oldInstructions.setText("Kirjoititko nimen varmasti oikein?\n  ");
-                    oldNameField.clear();
                     oldNameField.requestFocus();
                 }
             } catch (Exception e) {
