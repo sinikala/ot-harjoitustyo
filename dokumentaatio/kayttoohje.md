@@ -1,6 +1,6 @@
 # Käyttöohje
 
-Lataa tiedosto [Anagrammipeli.jar](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.1)
+Lataa tiedosto [Anagrammipeli.jar](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.2)
 
 ## Konfigurointi
 Sovelluksen käyttö ei edellytä erikoisia valmisteluja.
