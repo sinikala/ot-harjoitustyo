@@ -8,6 +8,9 @@ Lataa tiedosto [Anagrammipeli.jar](https://github.com/sinikala/ot-harjoitustyo/r
 ## Konfigurointi
 Varmista, että jar-tiedosto sijaitsee samassa kansiossa lataamiesi kuvatiedostojen kanssa.
 
+![kansioesimerkki](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/esimerkkikansio.png)
+
+
 ## Ohjelman käynnistäminen
 Ohjelma käynnistetään komennolla
 ````
