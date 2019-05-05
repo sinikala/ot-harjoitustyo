@@ -2,11 +2,11 @@
 
 Sovellusta on testattu käsinkirjoitetuilla JUnit yksikkötesteillä
 
-Testauskattavuus on rivikkattavuudeltaan 98 % ja haarakattavuudeltaan 70 %. Testikkattavuuden puutteet selittyvät kyseinten haarojen testaamisen monimutkaisuudella, sillä ne useimmiten edellyttävät "ihmisen toimintaa" kuten sanan oikein arvaamista.
-Käyytäliittymän toteuttava paketti on jötetty pois laiskuista testikattavuuden osalta.
+Testauskattavuus on rivikkattavuudeltaan 98 % ja haarakattavuudeltaan 70 %. Testikattavuuden puutteet selittyvät kyseisten haarojen testaamisen monimutkaisuudella, sillä ne useimmiten edellyttävät "ihmisen toimintaa" kuten sanan oikein arvaamista.
+Käyttöliittymän toteuttava luokka on jätetty pois laskuista testikattavuuden osalta.
 
 Eritoten DAO-paketin toiminnan testaamiseksi testien yhteydessä luodaan valekäyttäjä, jota hyödynnetään testauksessa.
-Testien päätteksi valekäytäjän tiedot poistetaan tietokannasta.
+Testien päätteksi valekäyttäjän tiedot poistetaan tietokannasta.
 ![testikattavuus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/testikattavuus.png)
 
 # Järjestelmätestaus
