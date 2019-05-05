@@ -19,10 +19,6 @@ public class Main extends Application {
     Pane picture;
     ImageView pic;
 
-//    @Override
-//    public void init() throws Exception {
-//        
-//    }
     @Override
     public void start(Stage window) throws Exception {
         GameService service = new GameService();
@@ -117,7 +113,7 @@ public class Main extends Application {
         scoreBox.getChildren().addAll(scoreNow, picture, backToGame);
         scoreLayout.setTop(scoreBox);
 
-        //all done scene
+        //all done components
         BorderPane doneLayout = new BorderPane();
         VBox doneBox = new VBox();
         doneBox.setPadding(new Insets(40, 80, 40, 80));
@@ -188,12 +184,12 @@ public class Main extends Application {
 
             }
         });
-        
-        backFromOld.setOnAction((event)-> {
+
+        backFromOld.setOnAction((event) -> {
             startLayout.setCenter(oldOrNewBox);
         });
-        
-         backFromNew.setOnAction((event)-> {
+
+        backFromNew.setOnAction((event) -> {
             startLayout.setCenter(oldOrNewBox);
         });
 
@@ -283,11 +279,3 @@ public class Main extends Application {
     }
 
 }
-/*
-picture.getChildren().remove(pic);
-                Image monster = new Image("file:monster.png");
-                pic = new ImageView(prints);
-                pic.setFitHeight(200);
-        pic.setFitWidth(200);
-                picture.getChildren().add(pic);
- */

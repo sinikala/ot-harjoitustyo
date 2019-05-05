@@ -4,6 +4,10 @@ import anagrammipeli.dao.UserDao;
 import anagrammipeli.logics.GameLibrary;
 
 import anagrammipeli.logics.*;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import org.junit.After;
 import org.junit.AfterClass;
 import org.junit.Before;
@@ -41,7 +45,26 @@ public class GameServiceTest {
 
     @After
     public void tearDown() throws Exception {
-        testDao.removeTestUser("Tes T. User");
+        //testDao.removeTestUser("Tes T. User");
+        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
+        PreparedStatement st = connection.prepareStatement("SELECT id FROM Player WHERE name = ?");
+        st.setString(1, "Tes T. User");
+
+        ResultSet rs = st.executeQuery();
+        int testUserId = rs.getInt("id");
+        st.close();
+        rs.close();
+
+        st = connection.prepareStatement("DELETE FROM Player WHERE name = ?");
+        st.setString(1, "Tes T. User");
+        st.executeUpdate();
+        st.close();
+
+        st = connection.prepareStatement("DELETE FROM solvedWords WHERE player_id = ?");
+        st.setInt(1, testUserId);
+        st.executeUpdate();
+        st.close();
+        connection.close();
     }
 
     @Test
@@ -82,12 +105,6 @@ public class GameServiceTest {
     }
 
     @Test
-    public void allDoneReturnsTrueWhenAllSolved() throws Exception {
-        user.setAmountOfSolved(library.getWordListSize());
-        assertEquals(true, service.allDone());
-    }
-
-    @Test
     public void getPercentageStartsFromZero() {
         assertEquals("Olet ratkaissut 0.0 % sanoista!", service.getPercentage());
     }
@@ -98,4 +115,29 @@ public class GameServiceTest {
         service.setSolved();
         assertNotEquals("Olet ratkaissut 0.0 % sanoista!", service.getPercentage());
     }
+
+    @Test
+    public void getScoreStartsFromZero() {
+        assertEquals("Olet nyt ratkaissut " + "\n" + "0/" + library.getWordListSize() + " sanaa.", service.getScore());
+    }
+
+    @Test
+    public void setSolvedAffectsScore() throws Exception {
+        service.getWord();
+        service.setSolved();
+        assertNotEquals("Olet nyt ratkaissut " + "\n" + "0/" + library.getWordListSize() + " sanaa.", service.getScore());
+    }
+
+    @Test
+    public void getpercentageForPictureStartsWithZero() {
+        assertEquals(0.0, service.getPercentageforPicture(), DELTA);
+    }
+
+    @Test
+    public void getPercentageForPictureRChangesWithSetSolved() throws Exception {
+        service.getWord();
+        service.setSolved();
+        assertNotEquals(0.0, service.getPercentageforPicture(), DELTA);
+    }
+
 }

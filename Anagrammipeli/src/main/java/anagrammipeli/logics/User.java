@@ -16,9 +16,10 @@ public class User {
     private int currentWordIndex;
 
     /**
-     *Alustetaan User-olio
-     * @param name  pelaajan käyttäjänimi
-     * @param playerId  tietokannan generoima pelaajan yksilöivä id-tunnus
+     * Alustetaan User-olio
+     *
+     * @param name pelaajan käyttäjänimi
+     * @param playerId tietokannan generoima pelaajan yksilöivä id-tunnus
      */
     public User(String name, int playerId) {
         this.library = new GameLibrary();
@@ -41,6 +42,7 @@ public class User {
 
     /**
      * Asettaa parametrinä annatussa indeksissä olevan anagrammin ratkaistuksi
+     *
      * @param index
      */
     public void setPreviouslySolvedWord(int index) {
@@ -48,8 +50,8 @@ public class User {
     }
 
     /**
-     * 
-     * @return jo ratkaistujen anagarammien lukumäärä 
+     *
+     * @return jo ratkaistujen anagrammien lukumäärä
      */
     public int getNumberOfSolvedWords() {
         return solved;
@@ -74,6 +76,7 @@ public class User {
 
     /**
      * Ilmoittaa montako anagrammia maksimista on ratkaistu
+     *
      * @return tilanteen kertova merkkijono
      */
     public String getScore() {
@@ -82,6 +85,7 @@ public class User {
 
     /**
      * Ilmoittaa prosentteina, kuinka suuri osa anagrammeista on ratkaistu
+     *
      * @return prosentuaalinen tilanne merkkijonona
      */
     public double getPercentage() {
@@ -94,6 +98,7 @@ public class User {
 
     /**
      * Tarkistaa, onko käyttäjän arvaus oikein
+     *
      * @param guess käyttäjän arvaus
      * @return true, jos arvaus on oikein, muuten false
      */
@@ -103,6 +108,7 @@ public class User {
 
     /**
      * Valitsee uuden, kyseisen käyttäjän aiemmin ratkaisemattoman anagrammin
+     *
      * @return X, jos kaikki anagrammit on jo ratkaistu, muuten uusi anagrammi
      */
     public String pickWordToSolve() {
@@ -127,7 +133,9 @@ public class User {
     }
 
     /**
-     * tarkastetaan onko pelaaja ratkaissut jo annetussa indeksissä olevan anagrammin
+     * tarkastetaan onko pelaaja ratkaissut jo annetussa indeksissä olevan
+     * anagrammin
+     *
      * @param idx kysytty indeksi
      * @return true, jos on ratkaistu, muuten false
      */

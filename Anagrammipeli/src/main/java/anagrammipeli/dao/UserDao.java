@@ -199,36 +199,4 @@ public class UserDao implements Dao {
         }
     }
 
-    /**
-     * Apumetodi GameService-luokan testausta varten, poistaa testeissä käytetyn
-     * testikäyttäjän tietokannasta
-     */
-    public void removeTestUser(String name) throws Exception {
-        
-        Connection connection = DriverManager.getConnection("jdbc:sqlite:playerDatabase.db");
-        
-        PreparedStatement st = connection.prepareStatement("SELECT id FROM Player WHERE name = ?");
-        st.setString(1, name);
-
-        ResultSet rs = st.executeQuery();
-        int testUserId = rs.getInt("id");
-
-        st.close();
-        rs.close(); 
-                
-        st = connection.prepareStatement("DELETE FROM Player WHERE name = ?");
-        st.setString(1, name);
-
-        st.executeUpdate();
-        st.close();
-        
-         st = connection.prepareStatement("DELETE FROM solvedWords WHERE player_id = ?");
-        st.setInt(1, testUserId);
-
-        st.executeUpdate();
-        st.close();
-        
-        connection.close();
-    }
-
 }

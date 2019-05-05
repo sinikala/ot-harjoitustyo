@@ -43,10 +43,25 @@ public class GameService {
         }
     }
 
+    /**
+     * Kutsuu userDaon metodia, jolla luodaan uusi, ensimmäistä kertaa pelaava
+     * käyttäjä
+     *
+     * @param name käyttäjän antama käyttäjänimi
+     * @throws Exception
+     */
     public void createNewUser(String name) throws Exception {
         user = userDao.create(name);
     }
 
+    /**
+     * Kutsuu userDaon metodia, joka tarkistaa, löytyykö tietokannasta jo
+     * parametrinä annettu käyttäjänimi
+     *
+     * @param name kysytty käyttäjänimi
+     * @return true, jos löytyy, muutoin false
+     * @throws Exception
+     */
     public boolean checkIfNameInUse(String name) throws Exception {
         return userDao.checkIfOldUser(name);
     }
@@ -124,6 +139,6 @@ public class GameService {
         } else {
             return user.getPercentage();
         }
-    }  
+    }
 
 }
