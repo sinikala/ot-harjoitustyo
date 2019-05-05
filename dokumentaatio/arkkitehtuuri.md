@@ -12,9 +12,9 @@ Sovelluksen arkkitehtuuri on kolmikerroksinen ja koodin pakkausrakenne on seuraa
 * Anagrammipeli.dao -Tietojen pysyväistalletus
 
 ## Käyttöliittymä
-Käyttöliittymä on toteuttettu kokonaan luokassa anagrammipeli.ui.Main. Muita spvelluksen käyttämiä metodeja se pyytää kutsumalla GameService-luokan metodeja, joka huolehtii pääosin sovelluslogiikasta. Käyttöliittymä muokkaa itseään tapahtumakäsittelijöiden aktivoitumisen ja GameService-oliolta saamiensa palautusarvojen pohjalta. Vastaavia muokkauksia ovat esimerkiksi näkymästä toiseen siirtyminen ja arvauksen tarkistaminen.
+Käyttöliittymä on toteuttettu kokonaan luokassa anagrammipeli.ui.Main. Muita sovelluksen toiminnallisuuksia Main-luokka  pyytää kutsumalla GameService-luokan metodeja. GameService huolehtii pääosin sovelluslogiikasta. Käyttöliittymä muokkaa itseään tapahtumakäsittelijöiden aktivoitumisen ja GameService-oliolta saamiensa palautusarvojen pohjalta. Tälläisia muokkauksia ovat esimerkiksi näkymästä toiseen siirtyminen ja arvauksen tarkistaminen.
 
-Käyttöliittymä sisältää kuusi kappaletta yksi kerrallaan näkyvää, neljään eri Scene-olioon pohjautuvaa näkymää:
+Käyttöliittymä sisältää kuusi kappaletta yksi kerrallaan näkyviä, neljään eri Scene-olioon pohjautuvaa näkymää:
 * aloitusvalikko ja valinnan mukaan sitä seuraa joko _Aloita uusi peli_ tai _Jatka vanhaa peliä_ -alinäkymä
 * pelinäkymä
 * tilastonäkymä
@@ -22,7 +22,7 @@ Käyttöliittymä sisältää kuusi kappaletta yksi kerrallaan näkyvää, nelj�
 
 
 ## Sovelluslogiikka
-Sovelluksen keskiössä ovat luokat User, joka kuvaa käyttäjää eli pelin pelaajaa ja tämän etenemistä pelissä sekä luokka  GameLibrary, johon on tallennettu pelin sanavarasto ja, joka toteuttaa lopullisen arvausten tarkastamisen.
+Sovelluksen keskiössä ovat luokat _User_, joka kuvaa käyttäjää eli pelin pelaajaa ja tämän etenemistä pelissä sekä luokka  GameLibrary, johon on tallennettu pelin sanavarasto ja, joka toteuttaa lopullisen arvausten tarkastamisen.
 
 Luokka GameService vastaa pelin toiminnallisuudesta ja toimii käyttöliittymän ja pelitietojen välikätenä.
 GameService tarjoaa metodin kaikkiin käyttöliittymän tarpeisiin. Muutama keskeinen esimerkki:
@@ -39,10 +39,10 @@ Anagrammipeli-sovellusta kuvaava luokka/pakkauskaavio:
 ![Pakkauskaavio](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/luokkakaavio.png)
 
 ## Tietojen pysyväistalletus
-Anagrammipeli.dao-paketin luokka UserDao huolehtii tietojen tallentamisesta tietokantaan. Rakenne mukailee Data Access Object -suunnittelumallia.
+anagrammipeli.dao-paketin luokka UserDao huolehtii tietojen tallentamisesta tietokantaan ja niiden noutamisesta. Rakenne mukailee Data Access Object -suunnittelumallia.
 
 ### Tallenettavat tiedot
-Sovellus tallentaa tietoja sovelluksen mukana tulevaan *playerDatabase*-tietokantaan. Tietokanta koostuu kahdesta tietokantataulusta: *Player* ja *SolvedWords*.
+Sovellus tallentaa tietoja sovelluksen luomaan *playerDatabase*-tietokantaan. Tietokanta koostuu kahdesta tietokantataulusta: *Player* ja *solvedWords*.
 
 ![Relaatiokaavio](http://yuml.me/a6146445.jpg)
 
@@ -59,14 +59,14 @@ Tässä tilanteessa pelaaja on valinnut jatkavansa aiempaa peliä ja syöttänyt
 
 Ensin UI pyytä GameServiceä tarkastamaan, että tälläinen pelaaja todella löytyy tietokannasta, parametrinaan pelaajan antama nimimerkki. UserDao huolehtii tietokannasta tarkistamisen. Koska UserDao löysi pelaajan, GameService kutsuu nyt pelaaja-oliota valmistelevia metodeja. UserDao luo pelaajaa vastaaavan User-luokan olion ja sen jälkeen tarkistaa tietokannasta _solvedWords_-tietokantataulusta mitkä sanat kyseinen pelaaja on mahdollisesti aiemmin ratkaissut ja tieto sijoitetaan User-olion muuttujiin. Lopuksi GameService palauttaa UI:lle _true_ onnistuneen vanhan pelaajan valmistelun merkiksi ja UI toivottaa käyttäjän tervetulleeksi.
 
-Uuden pelaajan luominen noudattaa hyvin pitkälti samaa logiikkaa, pois lukien aiempien ratkaisujen hakeminen. Sen sijaan luonnin yhteydessä tarkistetaan tietokanasta, ettei haluttu uusi käytäjänimi ole jo käytössä.
+Uuden pelaajan luominen noudattaa hyvin pitkälti samaa logiikkaa, pois lukien aiempien ratkaisujen hakeminen. Sen sijaan luonnin yhteydessä tarkistetaan tietokannasta, ettei haluttu uusi käyttäjänimi ole jo käytössä.
 
 #### arvauksen tarkistaminen
-Kun käyttäjä on syöttänyt arvauskenttään veikauksen ja klikkaa "Tarkista"-painiketta.
+Kun käyttäjä on syöttänyt arvauskenttään veikkauksen ja klikkaa "Tarkista"-painiketta.
 
 ![Tarkistus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tarkistus.png)
 
-Painikkeen painamiseen reagoiva tapahtumakäsittelijä kutsuu palveluluokkaa GameService, joka aloittaa arvauksen käsittelyn kustsumalla User-luokan metodia _check_ parametrinaan pelaajan arvaus. Pelaajaan liittyvä User-luokan olio pitää kirjaa nyt ratkaistavana olevan sanan indeksistä ja liittää sen veikkauksen mukana parametriksi kutsuessaan GameLibrary-luokan metodia _isCorrect_. GameLibrary vertaa onko sen sanalistassa annetussa indeksissä sama merkkijono kuin pelaajan arvauksessa. Tässä tapauksessa veikkaus on oikein, joten GameLibrary palauttaa arvon true. User puolestaan välittää true-arvon Gameserviselle. Nyt Nyt GameService kutsuu UserDaon metodia _setSolved_, joka huolehtii sanan merkitsemisestä ratkaistuksi. UserDao tallentaa ratkaistun sanan isdeksi tietokannan tauluun solvedWords ja kutsuu myös User-luokan metodia _setSolved_, jolloin myös käyttäjää kuvastavalle luokalle tallentuu tiet siitä, etät ko. sana on ratkaistu. Näiden tapahtumien jälkeen vuoro päätyy takaisin tapahtumakäsittelijälle, joka päivittää käyttöliittymää näyttämällä pelaajalle palautteen "Oikein!" Seuraavaksi UI pyytäisi GameServiceltä uutta anagrammia.
+Painikkeen painamiseen reagoiva tapahtumakäsittelijä kutsuu palveluluokkaa GameService, joka aloittaa arvauksen käsittelyn kutsumalla User-luokan metodia _check_ parametrinaan pelaajan arvaus. Pelaajaan liittyvä User-luokan olio pitää kirjaa nyt ratkaistavana olevan sanan indeksistä ja liittää sen veikkauksen mukana parametriksi kutsuessaan GameLibrary-luokan metodia _isCorrect_. GameLibrary vertaa onko sen sanalistassa annetussa indeksissä sama merkkijono kuin pelaajan arvauksessa. Tässä tapauksessa veikkaus on oikein, joten GameLibrary palauttaa arvon true. User puolestaan välittää true-arvon GameServiselle. Nyt Nyt GameService kutsuu UserDaon metodia _setSolved_, joka huolehtii sanan merkitsemisestä ratkaistuksi. UserDao tallentaa ratkaistun sanan indeksin tietokannan tauluun solvedWords ja kutsuu myös User-luokan metodia _setSolved_, jolloin myös käyttäjää kuvastavalle luokalle tallentuu tieto siitä, että ko. sana on ratkaistu. Näiden tapahtumien jälkeen vuoro päätyy takaisin tapahtumakäsittelijälle, joka päivittää käyttöliittymää näyttämällä pelaajalle palautteen "Oikein!" Seuraavaksi UI pyytäisi GameServiceltä uutta anagrammia.
 (Kaaviosta on lopusta jätetty pois varsinaisessa sovelluksessa palautteeseen liittyvän ratkaistujen sanojen lukumäärän noutaminen selkeyden takia)
 
 
