@@ -47,8 +47,12 @@ public class GameLibraryTest {
             char[] scrambled = library.getScrambledWord(i).toCharArray();
             Arrays.sort(word);
             Arrays.sort(scrambled);
-
-            assertTrue(Arrays.equals(word, scrambled));
+            String testWord = String.valueOf(word);
+            String testScrambled = String.valueOf(scrambled);
+            
+            assertEquals(testWord, testScrambled);
+            word = null;
+            scrambled = null;
         }
     }
 

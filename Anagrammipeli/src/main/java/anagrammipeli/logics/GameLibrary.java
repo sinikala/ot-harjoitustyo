@@ -17,8 +17,8 @@ public class GameLibrary {
         "saksi", "esim", "lompaies", "tilkata", "pötyä", "karahka", "tittamin", "pelloskepä",
         "alvas", "akomkaakertti", "henkäuui", "täsyvä", "tooadka", "otihle-jomlooini", "irihi",
         "kyeskiö", "kalaolpla", "perpu", "nolaus", "kisso", "kalisa", "mavaled", "vyet",
-        "trookiliik", "tatom", " riium", "lpölö", "tokta", "anuaatli", "aniifla", "jaonloim",
-        "orinkälehä", "kingnaus", "lato", "hikva"};
+        "trookiliik", "tatom", "riium", "lpölö", "tokta", "anuaatli", "aniifla", "jaonloim",
+        "orimkälehä", "kingnaus", "lato", "hikva"};
 
     /**
      * Palauttaa sanan oikeiden vastausten listasta
