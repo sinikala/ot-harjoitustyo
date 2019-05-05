@@ -1,6 +1,7 @@
 package anagrammipeli.logics;
 
 import anagrammipeli.logics.GameLibrary;
+import java.text.DecimalFormat;
 import java.util.Random;
 
 /**
@@ -89,10 +90,12 @@ public class User {
      * @return prosentuaalinen tilanne merkkijonona
      */
     public double getPercentage() {
+
         if (solved == 0) {
             return 0;
         }
-        return (solved * 1.0) / isSolved.length * 100;
+        double percentage =(solved * 1.0) / isSolved.length * 100;
+        return  (double)Math.round(percentage*100d)/100d;
 
     }
 

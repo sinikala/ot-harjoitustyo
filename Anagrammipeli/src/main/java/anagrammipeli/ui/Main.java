@@ -94,7 +94,7 @@ public class Main extends Application {
 
         //picture element
         picture = new Pane();
-        Image prints = new Image("file:prints.png");
+        Image prints = new Image("file:src/assets/prints.png");
         pic = new ImageView(prints);
         pic.setFitHeight(200);
         pic.setFitWidth(200);
@@ -118,7 +118,7 @@ public class Main extends Application {
         VBox doneBox = new VBox();
         doneBox.setPadding(new Insets(40, 80, 40, 80));
         Pane monstersPane = new Pane();
-        Image monster = new Image("file:monster.png");
+        Image monster = new Image("file:src/assets/monster.png");
         ImageView monsterPic = new ImageView(monster);
         pic.setFitHeight(200);
         pic.setFitWidth(200);
@@ -245,14 +245,14 @@ public class Main extends Application {
 
             if (percent >= 33 && percent < 66) {
                 picture.getChildren().remove(pic);
-                Image egg = new Image("file:egg.jpeg");
+                Image egg = new Image("file:src/assets/egg.jpeg");
                 pic = new ImageView(egg);
                 pic.setFitHeight(250);
                 pic.setFitWidth(200);
                 picture.getChildren().add(pic);
             } else if (percent >= 66 && percent < 100) {
                 picture.getChildren().remove(pic);
-                Image hatched = new Image("file:hatched.jpg");
+                Image hatched = new Image("file:src/assets/hatched.jpg");
                 pic = new ImageView(hatched);
                 pic.setFitHeight(200);
                 pic.setFitWidth(250);
