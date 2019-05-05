@@ -36,7 +36,7 @@ GameService pääsee käsiksi käyttäjiin joko Dao-rajapintaa toteuttavan UserD
 
 Anagrammipeli-sovellusta kuvaava luokka/pakkauskaavio:
 
-![Pakkauskaavio9(https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Pakkaus_luokkakaavio.jpg)
+![Pakkauskaavio](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/luokkakaavio.png)
 
 ## Tietojen pysyväistalletus
 Anagrammipeli.dao-paketin luokka UserDao huolehtii tietojen tallentamisesta tietokantaan. Rakenne mukailee Data Access Object -suunnittelumallia.
@@ -50,11 +50,30 @@ Tauluun *Player* tallennetaan pelaajan (ts. käyttäjän) nimi ja hänelle luoda
 
 
 ### Päätoiminnallisuudet
-Kuvataan seuraavaksi sekvenssikaaviona erään sovelluksen päätoiminnallisuuden toimintalogiikka.
+Kuvataan seuraavaksi sekvenssikaaviona sovelluksen kahden päätoiminnallisuuden toimintalogiikka.
+
+#### vanhan pelaajan tietojen haku
+Tässä tilanteessa pelaaja on valinnut jatkavansa aiempaa peliä ja syöttänyt tekstikenttään oikean käyttäjänimen.
+
+![VanhanpelaajanValmistelu](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/vanhanPelaajanValmistelu.png)
+
+Ensin UI pyytä GameServiceä tarkastamaan, että tälläinen pelaaja todella löytyy tietokannasta, parametrinaan pelaajan antama nimimerkki. UserDao huolehtii tietokannasta tarkistamisen. Koska UserDao löysi pelaajan, GameService kutsuu nyt pelaaja-oliota valmistelevia metodeja. UserDao luo pelaajaa vastaaavan User-luokan olion ja sen jälkeen tarkistaa tietokannasta _solvedWords_-tietokantataulusta mitkä sanat kyseinen pelaaja on mahdollisesti aiemmin ratkaissut ja tieto sijoitetaan User-olion muuttujiin. Lopuksi GameService palauttaa UI:lle _true_ onnistuneen vanhan pelaajan valmistelun merkiksi ja UI toivottaa käyttäjän tervetulleeksi.
+
+Uuden pelaajan luominen noudattaa hyvin pitkälti samaa logiikkaa, pois lukien aiempien ratkaisujen hakeminen. Sen sijaan luonnin yhteydessä tarkistetaan tietokanasta, ettei haluttu uusi käytäjänimi ole jo käytössä.
 
 #### arvauksen tarkistaminen
 Kun käyttäjä on syöttänyt arvauskenttään veikauksen ja klikkaa "Tarkista"-painiketta.
 
-![Tarkistus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/Tarkistus-false.png)
+![Tarkistus](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/tarkistus.png)
 
-Painikkeen painamiseen reagoiva tapahtumakäsittelijä kutsuu palveluluokkaa GameService, joka aloittaa arvauksen käsittelyn kustsumalla User-luokan metodia _check_ parametrinaan pelaajan arvaus. Pelaajaan liittyvä User-luokan olio pitää kirjaa nyt ratkaistavana olevan sanan indeksistä ja liittää sen veikkauksen mukana parametriksi kutsuessaan GameLibrary-luokan metodia _isCorrect_. GameLibrary vertaa onko sen sanalistassa annetussa indeksissä sama merkkijono kuin pelaajan arvauksessa. Tässä tapauksessa veikkaus on väärin, joten GameLibrary palauttaa arvon false. User puolestaan välittää false-arvon Gameserviselle, jolta tulos päätyy tapahtumakäsittelijälle, joka päivittää käyttöliittymää näyttämällä pelaajalle palautteen "Yritä uudestaan" ja tyhjentää arvauskentän. Nyt pelaajan voi halutessaan yrittää uudelleen.  
+Painikkeen painamiseen reagoiva tapahtumakäsittelijä kutsuu palveluluokkaa GameService, joka aloittaa arvauksen käsittelyn kustsumalla User-luokan metodia _check_ parametrinaan pelaajan arvaus. Pelaajaan liittyvä User-luokan olio pitää kirjaa nyt ratkaistavana olevan sanan indeksistä ja liittää sen veikkauksen mukana parametriksi kutsuessaan GameLibrary-luokan metodia _isCorrect_. GameLibrary vertaa onko sen sanalistassa annetussa indeksissä sama merkkijono kuin pelaajan arvauksessa. Tässä tapauksessa veikkaus on oikein, joten GameLibrary palauttaa arvon true. User puolestaan välittää true-arvon Gameserviselle. Nyt Nyt GameService kutsuu UserDaon metodia _setSolved_, joka huolehtii sanan merkitsemisestä ratkaistuksi. UserDao tallentaa ratkaistun sanan isdeksi tietokannan tauluun solvedWords ja kutsuu myös User-luokan metodia _setSolved_, jolloin myös käyttäjää kuvastavalle luokalle tallentuu tiet siitä, etät ko. sana on ratkaistu. Näiden tapahtumien jälkeen vuoro päätyy takaisin tapahtumakäsittelijälle, joka päivittää käyttöliittymää näyttämällä pelaajalle palautteen "Oikein!" Seuraavaksi UI pyytäisi GameServiceltä uutta anagrammia.
+(Kaaviosta on lopusta jätetty pois varsinaisessa sovelluksessa palautteeseen liittyvän ratkaistujen sanojen lukumäärän noutaminen selkeyden takia)
+
+
+## Ohjelman kehityskohdat
+
+### käyttöliittymä
+Graafinen käyttäliittymä on toteutettu täysin yhdessä luokassa ja sisältää paljon toisteisuutta. Näkymien luontia ja asettelua olisi hyvä yhdenmukaistaa sekä eritellä omiin luokkinsa tai metodeihinsa selkeyden vuoksi.
+
+### DAO
+UserDao-luokan toteutuksessa on hiottavaa parempien DAO-käytänteiden suuntaan. Lisäksi tietokantakutsut sisältävät paljon toisteisuutta yhteyden alustuksen muodossa, tätä olisi hyvä sieventää, mikäli mahdollista. Nyt se on toteutettu nykyisellä mallilla toiminnan takaamiseksi.
