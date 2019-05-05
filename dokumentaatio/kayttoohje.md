@@ -1,9 +1,12 @@
 # Käyttöohje
 
-Lataa tiedosto [Anagrammipeli.jar](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.2)
+Lataa tiedosto [Anagrammipeli.jar](https://github.com/sinikala/ot-harjoitustyo/releases/tag/v1.2) sekä samasta listasta löytyvät neljä kuvatiedostoa.
+
+![kuvaohje](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/kuvaohje.png)
+
 
 ## Konfigurointi
-Sovelluksen käyttö ei edellytä erikoisia valmisteluja.
+Varmista, että jar-tiedosto sijaitsee samassa kansiossa lataamiesi kuvatiedostojen kanssa.
 
 ## Ohjelman käynnistäminen
 Ohjelma käynnistetään komennolla
