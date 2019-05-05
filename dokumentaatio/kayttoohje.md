@@ -12,7 +12,9 @@ java -jar Anagrammipeli.jar
 ````
 
 ## Kirjautuminen
-Alussa valitaan halutaanko aloittaa uusi peli vai jatkaa aiemppaa
+
+Alussa valitaan halutaanko aloittaa uusi peli vai jatkaa aiempaa
+
 ![uusiVaiVanha](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Screenshot%20from%202019-05-05%2017-06-53.png)
 
 Mikäli valitaan uusi peli, käyttäjä voi syöttää haluamansa käyttäjänimen. Mikäli nimi on varattu, ilmoittaa peli siitä ja on pelaajan keksittävä uusi.
@@ -20,6 +22,7 @@ Mikäli valitaan uusi peli, käyttäjä voi syöttää haluamansa käyttäjänim
 ![uusi](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Screenshot%20from%202019-05-05%2017-07-58.png)
 
 Mikäli halutaan jatkaa vanhaa, kysyy peli aiempaa käyttänimeä
+
 ![vanha](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Screenshot%20from%202019-05-05%2017-07-34.png)
 
 
