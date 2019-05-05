@@ -4,12 +4,21 @@
 
 Sovelluksen arkkitehtuuri on kolmikerroksinen ja koodin pakkausrakenne on seuraava:
 
-![Pakkausrakenne](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/Pakettirakenne.png)
+![Pakkausrakenne](https://github.com/sinikala/ot-harjoitustyo/blob/master/dokumentaatio/kuvat/Pakettirakenne.png)
 
 **Pakkausten vastuualueet:**
 * Anagrammipeli.ui - Käyttöliittymä (JavaFx)
 * Anagrammipeli.logics - Sovelluslogiikka
 * Anagrammipeli.dao -Tietojen pysyväistalletus
+
+## Käyttöliittymä
+Käyttöliittymä on toteuttettu kokonaan luokassa anagrammipeli.ui.Main. Muita spvelluksen käyttämiä metodeja se pyytää kutsumalla GameService-luokan metodeja, joka huolehtii pääosin sovelluslogiikasta. Käyttöliittymä muokkaa itseään tapahtumakäsittelijöiden aktivoitumisen ja GameService-oliolta saamiensa palautusarvojen pohjalta. Vastaavia muokkauksia ovat esimerkiksi näkymästä toiseen siirtyminen ja arvauksen tarkistaminen.
+
+Käyttöliittymä sisältää kuusi kappaletta yksi kerrallaan näkyvää, neljään eri Scene-olioon pohjautuvaa näkymää:
+* aloitusvalikko ja valinnan mukaan sitä seuraa joko _Aloita uusi peli_ tai _Jatka vanhaa peliä_ -alinäkymä
+* pelinäkymä
+* tilastonäkymä
+* loppunäkymä
 
 
 ## Sovelluslogiikka
@@ -22,7 +31,7 @@ GameService tarjoaa metodin kaikkiin käyttöliittymän tarpeisiin. Muutama kesk
 * boolean check(String guess)
 * void setSolved()
 
-GameService pääsee käsiksi käyttäjiin joko Dao-rajapintaa toteuttavan UserDao-luokan kautta tai myöhemmin, kun kyseistä pelisessiota varten on luotu User-luokan olio, suoraan sitä kutsuvilla metodeilla. Teitojen tallennuksen ja noutamisen GameService toteuttaa aina UserDaon kautta.
+GameService pääsee käsiksi käyttäjiin joko Dao-rajapintaa toteuttavan UserDao-luokan kautta tai myöhemmin, kun kyseistä pelisessiota varten on luotu User-luokan olio, suoraan sitä kutsuvilla metodeilla. Tietojen pysyväistallennuksen ja noutamisen GameService toteuttaa aina UserDaon kautta.
 
 
 Anagrammipeli-sovellusta kuvaava luokka/pakkauskaavio:
