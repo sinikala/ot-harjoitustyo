@@ -25,11 +25,13 @@ public class GameService {
     }
 
     /**
-     * Tarkistaa löytyykö annettu käyttäjnimi jo tietokannasta. Jos löytyy, kutsuu metodeja, 
-     * jotka hakevat pelaajan tiedot tietokannasta ja asettavat ne käyttäjää kuvastavaan User-luokan olion muuttujiin 
-     * @param name  Käyttäjän antama käyttäjänimi
+     * Tarkistaa löytyykö annettu käyttäjnimi jo tietokannasta. Jos löytyy,
+     * kutsuu metodeja, jotka hakevat pelaajan tiedot tietokannasta ja asettavat
+     * ne käyttäjää kuvastavaan User-luokan olion muuttujiin
+     *
+     * @param name Käyttäjän antama käyttäjänimi
      * @return true, jos annettu nimi löytyy tietokannasta, muutoin false
-     * @throws Exception 
+     * @throws Exception
      */
     public boolean getOldUser(String name) throws Exception {
         if (userDao.checkIfOldUser(name)) {
@@ -111,12 +113,17 @@ public class GameService {
         return "Olet ratkaissut " + percentage + " % sanoista!";
     }
 
+    /**
+     * Apumetodi edistymiskuvan määrittelyä varten
+     *
+     * @return montako prosenttia sanoista on ratkaistu
+     */
     public Double getPercentageforPicture() {
         if (user == null) {
             return 0.0;
         } else {
             return user.getPercentage();
         }
-    }
+    }  
 
 }

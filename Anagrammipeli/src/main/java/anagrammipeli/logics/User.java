@@ -47,6 +47,10 @@ public class User {
         isSolved[index] = true;
     }
 
+    /**
+     * 
+     * @return jo ratkaistujen anagarammien lukumäärä 
+     */
     public int getNumberOfSolvedWords() {
         return solved;
     }

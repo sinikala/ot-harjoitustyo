@@ -76,11 +76,34 @@ public class UserTest {
     }
 
     @Test
+    public void pickWordToSolveReturnsWord() {
+        String stringReceived = null;
+        stringReceived = user.pickWordToSolve();
+        assertFalse(stringReceived == null);
+    }
+
+    @Test
     public void pickWordToSolveReturnsXWhenAllSolved() {
-        for (int i = 0; i < library.getWordListSize(); i++) {
-            user.setSolved();
-        }
+        user.setAmountOfSolved(library.getWordListSize());
         assertEquals("X", user.pickWordToSolve());
 
     }
+
+    @Test
+    public void userStartsWithWordIndexZero() {
+        assertEquals(0, user.getWordIndex());
+    }
+
+    @Test
+    public void setAmountOfSolvedChangesSolvedCounter() {
+        user.setAmountOfSolved(5);
+        assertFalse(user.getNumberOfSolvedWords() == 0);
+    }
+
+    @Test
+    public void setPreviouslySolvedWordChangesWordToSolvedStatus() {
+        user.setPreviouslySolvedWord(2);
+        assertEquals(true, user.checkIfSolved(2));
+    }
+
 }
